@@ -38,6 +38,5 @@ $(".mydivs").anima({x:200}, 800, "linear", {skipNoSupport:true}); // skip the an
 
 License
 -------
-Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
+© 2013 Minimit. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
-© 2013 Minimit
