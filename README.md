@@ -25,6 +25,7 @@ anima3d(properties:object, duration:number, easing:string, options:object);
 ```
 
 The properties you can animate can be any css (use string if it's not a valid javascript variable like {"margin-top":500}) or transform like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
+
 The easing property can be a custom bezier or a preset like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
 ``` javascript
