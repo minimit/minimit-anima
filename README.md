@@ -5,7 +5,7 @@ My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter
 
 Description
 -------
-Hardware accelerated css3 animations with fallback for older browsers.
+**Hardware accelerated css3 animations with fallback for older browsers.**
 
 It's built to have fast animation execution and it has an Api very similar to Jquery animate.
 
@@ -24,9 +24,9 @@ anima2d(properties:object, duration:number, easing:string, options:object);
 anima3d(properties:object, duration:number, easing:string, options:object);
 ```
 
-The properties you can animate can be any css (use string if it's not a valid javascript variable like {"margin-top":500} or transform like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
+The properties you can animate can be **any css** (use string if it's not a valid javascript variable like {"margin-top":500} or **transform**like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
 
-The easing property can be a custom bezier or a preset like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
+The easing property can be a **custom bezier** or a **preset** like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
 ``` javascript
 $(".mydivs").anima({x:100}); // instant animation of transformX
