@@ -11,7 +11,7 @@ It's built to have fast animation execution and it has an Api very similar to Jq
 
 By default the plugin do automatic fallback animation on browsers not supporting transitions or transform3d, and instant animation on browser not supporting transforms.
 
-You can specify a different animations based on the browser support using anima2d and anima3d, for example to have a specific animation on ie9- use anima2d, on ie10+ use anima3d.
+You can specify a different animations based on the browser support using anima2d and anima3d, for example to have a specific animation on IE9- use anima2d, on IE10+ use anima3d.
 
 It also does scale, rotate and skew on browsers without transform3d thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
 
