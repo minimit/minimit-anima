@@ -55,6 +55,9 @@ delayAnima2d();
 delayAnima3d();
 ```
 
+Parameters
+-------
+
 The properties you can animate can be:
 * **any css**, use string if it's not a valid javascript variable like {"margin-top":500}
 * **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
@@ -63,8 +66,53 @@ The easing property can be:
 * a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
 * a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
+Instant animations are default:
+
+``` javascript
+$(this).anima({x:10});
+```
+
+Default easing is "ease":
+
+``` javascript
+$(this).anima({x:10}, 400);
+```
+
+Custom easing is a bezier string:
+
+``` javascript
+$(this).anima({x:10}, 400, ".19,1,.22,1");
+```
+
+You can set a function to execute on animation completed:
+
+``` javascript
+$(this).anima({x:10}, 400, ".19,1,.22,1", {complete:function(){alert("done")}});
+```
+
+You can skip automatic fallback animations
+
+``` javascript
+$(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
+```
+
 Examples
 -------
+
+###Translate
+
+Use **x** , **y**, or **z** property:
+
+``` javascript
+$(this).anima({x:10, y:10});
+```
+
+###Scale
+
+You can use scale, scaleX, scaleY or scaleZ
+``` javascript
+$(this).anima({scaleX:0.8, scaleY:0.8}, 400);
+```
 
 ``` javascript
 $(".mydivs").anima({x:100}); // instant animation of transformX
