@@ -66,17 +66,20 @@ The easing property can be:
 * a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
 * a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
-Instant animations are default: `$(this).anima({x:10});`
+
+Instant animations are default:
 
 ``` javascript
 $(this).anima({x:10});
 ```
+
 
 Default easing is "ease":
 
 ``` javascript
 $(this).anima({x:10}, 400);
 ```
+
 
 Custom easing is a bezier string:
 
