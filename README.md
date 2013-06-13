@@ -143,7 +143,7 @@ $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
 
 ###Animations management
 
-Delay animations in the queue by 100 milliseconds:
+Delay animations in the queue by 200 milliseconds:
 
 ``` javascript
 $(this).delayAnima(200);
@@ -161,6 +161,18 @@ Stop the current running animation:
 $(this).stopAnima();
 ```
 
+Stop the current running animation and clear the queue:
+
+``` javascript
+$(this).stopAnima(true);
+```
+
+Stop the current running animation and jump to end:
+
+``` javascript
+$(this).stopAnima(false, true);
+```
+
 ###Other examples
 
 Different animations based on browser support of transition and transform3d
@@ -168,6 +180,10 @@ Different animations based on browser support of transition and transform3d
 ``` javascript
 $(this).anima3d({x:200}, 800).anima2d({x:100}, 800);
 ```
+
+Alternate syntax
+-------
+To do
 
 License
 -------
