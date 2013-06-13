@@ -59,6 +59,7 @@ Parameters
 -------
 
 Instant animations are default:
+
 ``` javascript
 $(this).anima({x:10});
 ```
