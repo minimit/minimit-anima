@@ -1,6 +1,7 @@
 /*
  * Minimit Anima 1.0
- * Copyright (C) 2012 by Riccardo Caroli http://www.minimit.com
+ * http://github.com/minimit/minimit-anima
+ * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */
 

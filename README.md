@@ -4,6 +4,7 @@
 My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimit](http://twitter.com/beaver82minimit)
 
 ### Description
+
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
 It's built to have fast animation execution and it has an Api very similar to Jquery animate.
@@ -40,5 +41,5 @@ $(".mydivs").clearAnima(); // stop all anima delays
 
 License
 -------
-© 2013 Minimit. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
+Copyright © 2013 Riccardo Caroli. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
