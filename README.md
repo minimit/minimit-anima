@@ -103,7 +103,7 @@ Examples
 
 ###Usage
 
-Include minimit-anima after jQuery.
+Include minimit-anima after jQuery:
 
 ``` html
 <script src='jquery.js'></script>
@@ -112,7 +112,7 @@ Include minimit-anima after jQuery.
 
 ###Animating css
 
-Still to test all, here a [list of animable css properties](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties).
+You can animate any css listed  [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties), still have to test all.
 
 ``` javascript
 $(this).anima({"margin-top":20}, 400);
