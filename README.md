@@ -155,19 +155,19 @@ Clear all animations queued that have not yet been run:
 $(this).clearAnima();
 ```
 
-Stop the current running animation:
+Stop the current running animations:
 
 ``` javascript
 $(this).stopAnima();
 ```
 
-Stop the current running animation and clear the queue:
+Stop the current running animations and clear the queue:
 
 ``` javascript
 $(this).stopAnima(true);
 ```
 
-Stop the current running animation and jump to end:
+Stop the current running animations and jump to end:
 
 ``` javascript
 $(this).stopAnima(false, true);
