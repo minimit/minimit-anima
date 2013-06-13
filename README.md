@@ -34,6 +34,9 @@ $(".mydivs").anima({scale:0.8}, 800, ".19,1,.22,1"); // animation of scale with 
 $(".mydivs").anima({"margin-top":500}, 200, ".19,1,.22,1", {complete:function(){$(this).css("display","none");}}); // example with css property animation and complete function
 $(".mydivs").anima3d({x:200}, 800).anima2d({x:100}, 800); // different animations based on browser support of transition and transform3d
 $(".mydivs").anima({x:200}, 800, "linear", {skipNoSupport:true}); // skip the animation on browser without transform support
+$(".mydivs").delayAnima(200).anima({x:100}); // delay anima animations
+$(".mydivs").stopAnima(); // stop all anima animations
+$(".mydivs").clearAnima(); // stop all anima delays
 ```
 
 License
