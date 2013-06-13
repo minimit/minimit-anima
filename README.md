@@ -101,7 +101,7 @@ Examples
 
 ~~striketrought~~ things are still not tested or supported
 
-###Css properties
+###Animating css
 
 Still to test all, here a [list of animable css properties](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties).
 
@@ -141,15 +141,32 @@ You can use ~~**skew**~~, **skewX** or **skewY**
 $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
 ```
 
+###Animations management
+
+Delay animations in the queue by 100 milliseconds:
+
 ``` javascript
-$(".mydivs").anima({x:100}); // instant animation of transformX
-$(".mydivs").anima({scale:0.8}, 800, ".19,1,.22,1"); // animation of scale with duration and custom easing
-$(".mydivs").anima({"margin-top":500}, 200, ".19,1,.22,1", {complete:function(){$(this).css("display","none");}}); // example with css property animation and complete function
-$(".mydivs").anima3d({x:200}, 800).anima2d({x:100}, 800); // different animations based on browser support of transition and transform3d
-$(".mydivs").anima({x:200}, 800, "linear", {skipNoSupport:true}); // skip the animation on browser without transform support
-$(".mydivs").delayAnima(200).anima({x:100}); // delay anima animations
-$(".mydivs").stopAnima(); // stop all anima animations
-$(".mydivs").clearAnima(); // stop all anima delays
+$(this).delayAnima(200);
+```
+
+Clear all animations queued that have not yet been run:
+
+``` javascript
+$(this).clearAnima();
+```
+
+Stop the current running animation:
+
+``` javascript
+$(this).stopAnima();
+```
+
+###Other examples
+
+Different animations based on browser support of transition and transform3d
+
+``` javascript
+$(this).anima3d({x:200}, 800).anima2d({x:100}, 800);
 ```
 
 License
