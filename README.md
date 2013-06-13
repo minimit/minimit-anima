@@ -1,5 +1,4 @@
 # [minimit-anima](http://www.minimit.com/projects/code/minimit-anima)
-#### Jquery plugin to animate with css3 transforms and transitions
 
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
