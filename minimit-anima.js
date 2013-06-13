@@ -320,6 +320,20 @@ Math);
             duration = 0;
         }
     };
+    $.fn.delayAnima2d = function(time){
+        return $(this).each(function(){
+            if(!$.anima.noSupport){
+                $(this).delay(time, "anima2d");
+            }
+        });
+    };
+    $.fn.delayAnima3d = function(time){
+        return $(this).each(function(){
+            if(!$.anima.noSupport){
+                $(this).delay(time, "anima3d");
+            }
+        });
+    };
     $.fn.delayAnima = function(time, type){
         return $(this).each(function(){
             if(!$.anima.noSupport){
