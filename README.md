@@ -16,25 +16,25 @@ It also does scale, rotate and skew on browsers without transform3d thanks to <a
 Api
 -------
 
-Use the anima methods to have automatic fallback
+Use the **anima** method to have automatic fallback:
 
 ``` javascript
 anima(properties:object, duration:number, easing:string, options:object);
 ```
 
-Use anima2d to execute animations only on browsers without transitions or transform3d
+Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
 
 ``` javascript
 anima2d(properties:object, duration:number, easing:string, options:object);
 ```
 
-Use anima3d to execute animations only on browser with transitions or transform3d
+Use the **anima3d** method to execute animations only on browser with transitions or transform3d:
 
 ``` javascript
 anima3d(properties:object, duration:number, easing:string, options:object);
 ```
 
-To stop animations use the respective stopAnima method
+Use the respective **stopAnima** method to stop animations:
 
 ``` javascript
 stopAnima(clearQueue:boolean, jumpToEnd:boolean);
@@ -42,7 +42,7 @@ stopAnima2d(clearQueue:boolean, jumpToEnd:boolean);
 stopAnima3d(clearQueue:boolean, jumpToEnd:boolean);
 ```
 
-To delay animations use the respective delayAnima method
+Use the respective **delayAnima** method to delay animations:
 
 ``` javascript
 delayAnima(time:number);
@@ -50,7 +50,7 @@ delayAnima2d(time:number);
 delayAnima3d(time:number);
 ```
 
-To clear the queue use the respective clearAnima method
+Use the respective **clearAnima** method to clear the queue:
 
 ``` javascript
 clearAnima();
