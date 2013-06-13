@@ -1,7 +1,7 @@
 # [minimit-anima](http://www.minimit.com/projects/code/minimit-anima)
 #### Jquery plugin to animate with css3 transforms and transitions
 
-My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter.com/beaver82minimit)
+My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimit](http://twitter.com/beaver82minimit)
 
 Description
 -------
