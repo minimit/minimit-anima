@@ -181,10 +181,6 @@ Different animations based on browser support of transition and transform3d
 $(this).anima3d({x:200}, 800).anima2d({x:100}, 800);
 ```
 
-Alternate syntax
--------
-To do
-
 License
 -------
 Copyright © 2013 Riccardo Caroli. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
