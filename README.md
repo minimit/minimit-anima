@@ -103,8 +103,7 @@ Examples
 
 ###Usage
 
-Include jquery and minimit-anima
-Include this minimit-anima after jQuery.
+Include minimit-anima after jQuery.
 
 ``` html
 <script src='jquery.js'></script>
