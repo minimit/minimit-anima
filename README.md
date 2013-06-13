@@ -184,10 +184,10 @@ $(this).stopAnima(false, true);
 
 ###Other examples
 
-Different animations based on browser support of transition and transform3d
+Stop all animations, and do different animations based on browser support of transition and transform3d:
 
 ``` javascript
-$(this).anima3d({x:200}, 800).anima2d({x:100}, 800);
+$(this).stopAnima().anima3d({x:200}, 800).anima2d({x:100}, 800);
 ```
 
 Acknowledgements
