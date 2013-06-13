@@ -89,7 +89,7 @@ $(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSuppor
 ```
 
 The properties you can animate can be:
-* **any css**, use string if it's not a valid javascript variable like {"margin-top":500}
+* **any css**, use string if it's not a valid javascript variable like {"margin-top":20}
 * **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
 
 The easing property can be:
@@ -101,12 +101,20 @@ Examples
 
 ~~striketrought~~ things are still not tested or supported
 
+###Css properties
+
+Still to test all, here a [list of animable css properties](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties).
+
+``` javascript
+$(this).anima({"margin-top":20}, 400);
+```
+
 ###Translate
 
 Use **x** , **y**, or **z** property:
 
 ``` javascript
-$(this).anima({x:10, y:10});
+$(this).anima({x:10, y:10}, 400);
 ```
 
 ###Scale
