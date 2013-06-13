@@ -1,4 +1,4 @@
-# [minimit-anima](http://www.minimit.com/projects/code/minimit-anima)
+# [minimit-anima](http://www.minimit.com/projects/code/minimit-anima-plugin)
 
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
