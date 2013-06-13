@@ -58,28 +58,17 @@ delayAnima3d();
 Parameters
 -------
 
-The properties you can animate can be:
-* **any css**, use string if it's not a valid javascript variable like {"margin-top":500}
-* **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
-
-The easing property can be:
-* a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
-* a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
-
-
 Instant animations are default:
 
 ``` javascript
 $(this).anima({x:10});
 ```
 
-
 Default easing is "ease":
 
 ``` javascript
 $(this).anima({x:10}, 400);
 ```
-
 
 Custom easing is a bezier string:
 
@@ -98,6 +87,14 @@ You can skip automatic fallback animations
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
 ```
+
+The properties you can animate can be:
+* **any css**, use string if it's not a valid javascript variable like {"margin-top":500}
+* **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
+
+The easing property can be:
+* a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
+* a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
 Examples
 -------
