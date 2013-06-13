@@ -1,10 +1,6 @@
 # [minimit-anima](http://www.minimit.com/projects/code/minimit-anima)
 #### Jquery plugin to animate with css3 transforms and transitions
 
-My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimit](http://twitter.com/beaver82minimit)
-
-### Description
-
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
 It's built to have fast animation execution and it has an Api very similar to Jquery animate.
@@ -12,6 +8,8 @@ It's built to have fast animation execution and it has an Api very similar to Jq
 By default the anima method do **automatic fallback animation** on browsers without transitions or transform3d, and **instant animation** on browser without transforms.
 
 It also does scale, rotate and skew on browsers without transform3d thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
+
+My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimit](http://twitter.com/beaver82minimit)
 
 Api
 -------
