@@ -101,6 +101,16 @@ Examples
 
 ~~striketrought~~ things are still not tested or supported
 
+###Usage
+
+Include jquery and minimit-anima
+Include this minimit-anima after jQuery.
+
+``` html
+<script src='jquery.js'></script>
+<script src='minimit-anima.min.js'></script>
+```
+
 ###Animating css
 
 Still to test all, here a [list of animable css properties](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties).
