@@ -190,7 +190,11 @@ Different animations based on browser support of transition and transform3d
 $(this).anima3d({x:200}, 800).anima2d({x:100}, 800);
 ```
 
-License
+Acknowledgements
 -------
 Copyright © 2013 Riccardo Caroli. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
+This plugin include
+* Modernizr http://modernizr.com
+* Bez http://github.com/rdallasgray/bez
+* Transform http://github.com/louisremi/jquery.transform.js
