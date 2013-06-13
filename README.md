@@ -55,10 +55,6 @@ delayAnima2d();
 delayAnima3d();
 ```
 
-Examples
--------
-
-
 The properties you can animate can be:
 * **any css**, use string if it's not a valid javascript variable like {"margin-top":500}
 * **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
@@ -66,6 +62,9 @@ The properties you can animate can be:
 The easing property can be:
 * a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
 * a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
+
+Examples
+-------
 
 ``` javascript
 $(".mydivs").anima({x:100}); // instant animation of transformX
