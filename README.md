@@ -99,6 +99,8 @@ The easing property can be:
 Examples
 -------
 
+~~striketrought~~ things arestill not supported
+
 ###Translate
 
 Use **x** , **y**, or **z** property:
@@ -109,9 +111,16 @@ $(this).anima({x:10, y:10});
 
 ###Scale
 
-You can use scale, scaleX, scaleY or scaleZ
+You can use ~~scale~~, scaleX, scaleY or scaleZ
 ``` javascript
 $(this).anima({scaleX:0.8, scaleY:0.8}, 400);
+```
+
+###Rotate
+
+You can use ~~rotate~~, rotateX, rotateY or rotateZ
+``` javascript
+$(this).anima({rotateX:"20deg", rotateZ:"20deg"}, 400);
 ```
 
 ``` javascript
