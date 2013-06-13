@@ -3,8 +3,7 @@
 
 My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimit](http://twitter.com/beaver82minimit)
 
-Description
--------
+### Description
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
 It's built to have fast animation execution and it has an Api very similar to Jquery animate.
