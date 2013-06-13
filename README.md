@@ -9,20 +9,58 @@ My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimi
 
 It's built to have fast animation execution and it has an Api very similar to Jquery animate.
 
-By default the plugin do automatic fallback animation on browsers not supporting transitions or transform3d, and instant animation on browser not supporting transforms.
-
-You can specify a different animations based on the browser support using anima2d and anima3d, for example to have a specific animation on IE9- use anima2d, on IE10+ use anima3d.
+By default the anima method do **automatic fallback animation** on browsers without transitions or transform3d, and **instant animation** on browser without transforms.
 
 It also does scale, rotate and skew on browsers without transform3d thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
 
-Usage
+Api
 -------
+
+Use the anima methods to have automatic fallback
 
 ``` javascript
 anima(properties:object, duration:number, easing:string, options:object);
+```
+
+Use anima2d to execute animations only on browsers without transitions or transform3d
+
+``` javascript
 anima2d(properties:object, duration:number, easing:string, options:object);
+```
+
+Use anima3d to execute animations only on browser with transitions or transform3d
+
+``` javascript
 anima3d(properties:object, duration:number, easing:string, options:object);
 ```
+
+To stop animations use the respective stopAnima method
+
+``` javascript
+stopAnima(clearQueue:boolean, jumpToEnd:boolean);
+stopAnima2d(clearQueue:boolean, jumpToEnd:boolean);
+stopAnima3d(clearQueue:boolean, jumpToEnd:boolean);
+```
+
+To delay animations use the respective delayAnima method
+
+``` javascript
+delayAnima(time:number);
+delayAnima2d(time:number);
+delayAnima3d(time:number);
+```
+
+To clear the queue use the respective clearAnima method
+
+``` javascript
+clearAnima();
+delayAnima2d();
+delayAnima3d();
+```
+
+Examples
+-------
+
 
 The properties you can animate can be **any css** (use string if it's not a valid javascript variable like {"margin-top":500} or **transform** like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
 
