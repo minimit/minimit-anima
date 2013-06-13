@@ -68,9 +68,7 @@ The easing property can be:
 
 Instant animations are default:
 
-``` javascript
-$(this).anima({x:10});
-```
+- $(this).anima({x:10});
 
 Default easing is "ease":
 
