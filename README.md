@@ -82,7 +82,7 @@ You can set a function to execute on animation completed:
 $(this).anima({x:10}, 400, ".19,1,.22,1", {complete:function(){alert("done")}});
 ```
 
-You can skip automatic fallback animations
+You can skip automatic fallback animations:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
@@ -112,7 +112,7 @@ Include minimit-anima after jQuery:
 
 ###Animating css
 
-You can animate any css listed  [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties), still have to test all.
+You can animate any css (still have to test all) listed [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties):
 
 ``` javascript
 $(this).anima({"margin-top":20}, 400);
@@ -128,7 +128,7 @@ $(this).anima({x:10, y:10}, 400);
 
 ###Scale
 
-You can use ~~**scale**~~, **scaleX**, **scaleY** or **scaleZ**
+You can use ~~**scale**~~, **scaleX**, **scaleY** or **scaleZ**:
 
 ``` javascript
 $(this).anima({scaleX:0.8, scaleY:0.8}, 400);
@@ -136,7 +136,7 @@ $(this).anima({scaleX:0.8, scaleY:0.8}, 400);
 
 ###Rotate
 
-You can use ~~**rotate**~~, **rotateX**, **rotateY** or **rotateZ**
+You can use ~~**rotate**~~, **rotateX**, **rotateY** or **rotateZ**:
 
 ``` javascript
 $(this).anima({rotateX:"20deg", rotateZ:"20deg"}, 400);
@@ -144,7 +144,7 @@ $(this).anima({rotateX:"20deg", rotateZ:"20deg"}, 400);
 
 ###Skew
 
-You can use ~~**skew**~~, **skewX** or **skewY**
+You can use ~~**skew**~~, **skewX** or **skewY**:
 
 ``` javascript
 $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
