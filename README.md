@@ -88,7 +88,7 @@ You can skip automatic fallback animations:
 $(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
 ```
 
-If you want backfaceVisibility on the animation, you have to set it, because by default the animation sets backfaceVisibility to false, to fix some chrome bugs:
+If you want backfaceVisibility on the animation, you have to set it this way, because by default the animation sets backfaceVisibility to false, to fix some browser bugs:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1", {backfaceVisibility:true});
