@@ -196,10 +196,10 @@ Trigger hardware accelerated animations, by animating the **z** and the **perspe
 $(this).anima({x:200, z:0, perspective:1000}, 800);
 ```
 
-Stop all animations, and do different animations based on browser support of transition and transform3d:
+Do different animations based on browser support of transition and transform3d:
 
 ``` javascript
-$(this).stopAnima().anima3d({x:200}, 800).anima2d({x:100}, 800);
+$(this).anima3d({rotateX:"10deg", rotateY:"10deg", rotateZ:"10deg"}, 800).anima2d({scale:0.8}, 800);
 ```
 
 Acknowledgements
