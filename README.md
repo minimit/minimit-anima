@@ -190,10 +190,10 @@ $(this).stopAnima(false, true);
 
 ###Other examples
 
-Trigger hardware accelerated animations, by animating the **z** property:
+Trigger hardware accelerated animations, by animating the **z** and the **perspective** property:
 
 ``` javascript
-$(this).anima({x:200, z:0}, 800), 800);
+$(this).anima({x:200, z:0, perspective:1000}, 800), 800);
 ```
 
 Stop all animations, and do different animations based on browser support of transition and transform3d:
