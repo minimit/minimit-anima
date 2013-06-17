@@ -88,6 +88,12 @@ You can skip automatic fallback animations:
 $(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
 ```
 
+If you want backfaceVisibility on the animation, you have to set it, because by default the animation sets backfaceVisibility to false, to fix some chrome bugs:
+
+``` javascript
+$(this).anima({x:10}, 400, ".19,1,.22,1", {backfaceVisibility:true});
+```
+
 The properties you can animate can be:
 * **any css**, use string if it's not a valid javascript variable like {"margin-top":20}
 * **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
