@@ -56,19 +56,20 @@ Instant animations are default:
 $(this).anima({x:10});
 ```
 
-Default easing is "ease":
+You can specify a duration, default easing is "ease":
 
 ``` javascript
 $(this).anima({x:10}, 400);
 ```
 
-Custom easing is a bezier string:
+You can specify a custom easing or a preset easing:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1");
+$(this).anima({x:10}, 400, "linear");
 ```
 
-The animations delayed don't queue they run asynchronously:
+You can specify a delay, they run asynchronously so they don't queue:
 
 ``` javascript
 $(this).anima({x:10}, 800, ".19,1,.22,1", 400);
