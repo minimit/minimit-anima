@@ -112,7 +112,7 @@ Include minimit-anima after jQuery:
 
 ###Animating css
 
-You can animate any css (still have to test all) listed [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties):
+You can animate **any css** (still have to test all) listed [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties):
 
 ``` javascript
 $(this).anima({"margin-top":20}, 400);
