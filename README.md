@@ -150,13 +150,15 @@ You can use ~~**skew**~~, **skewX** or **skewY**:
 $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
 ```
 
-###Animations management
+###Clear
 
 Clear all delayed animations that have not yet been run:
 
 ``` javascript
 $(this).clearAnima(); // or $(this).clearAnima2d(); or $(this).clearAnima3d();
 ```
+
+###Stop
 
 Stop the current running animations:
 
@@ -176,6 +178,14 @@ Stop the current running animations and jump to end:
 $(this).stopAnima(false, true);
 ```
 
+###2D and 3D
+
+Do different animations based on browser support of transition and transform3d:
+
+``` javascript
+$(this).anima3d({rotateX:"10deg", rotateY:"10deg", rotateZ:"10deg"}, 800).anima2d({scale:0.8}, 800);
+```
+
 Tricks and fixes
 -------
 
@@ -183,12 +193,6 @@ Trigger **hardware accelerated** animations, by animating the **z** and the **pe
 
 ``` javascript
 $(this).anima({x:200, z:0, perspective:1000}, 800);
-```
-
-Do different animations based on browser support of transition and transform3d:
-
-``` javascript
-$(this).anima3d({rotateX:"10deg", rotateY:"10deg", rotateZ:"10deg"}, 800).anima2d({scale:0.8}, 800);
 ```
 
 Fix browser bug in chrome, 1 pixel shift:
