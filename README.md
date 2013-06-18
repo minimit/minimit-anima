@@ -203,9 +203,9 @@ function startAnimation(){
     $(this).clearAnima().stopAnima().anima({x:0, width:0});
     $(this).anima({x:0, width:120}, 600, bez0);
     $(this).anima({x:120, width:0}, 600, bez0, 600, {complete:function(){
-        $(this).clearAnima().stopAnima().anima({x:0, width:0}); // fix
+        $(this).clearAnima().stopAnima().anima({x:0, width:0}); // fix by applying animation on complete
     }});
-    setTimeout(function(){startAnimation();}, 1300);
+    setTimeout(function(){startAnimation();}, 1300); // fix by using longer duration
 }
 startAnimation();
 ```
