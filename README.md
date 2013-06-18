@@ -96,12 +96,12 @@ The easing property can be:
 * a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
 * a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
-Examples
+Usage
 -------
 
 ~~striketrought~~ things are still not tested or supported
 
-###Usage
+###Setup
 
 Include minimit-anima after jQuery:
 
