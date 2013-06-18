@@ -155,13 +155,13 @@ $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
 Clear all delayed animations that have not yet been run:
 
 ``` javascript
-$(this).clearAnima();
+$(this).clearAnima(); // or $(this).clearAnima2d(); or $(this).clearAnima3d();
 ```
 
 Stop the current running animations:
 
 ``` javascript
-$(this).stopAnima();
+$(this).stopAnima(); // or $(this).stopAnima2d(); or $(this).stopAnima3d();
 ```
 
 Stop the current running animations and clear the queue:
