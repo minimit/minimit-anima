@@ -110,7 +110,7 @@ Include minimit-anima after jQuery:
 <script src='minimit-anima.min.js'></script>
 ```
 
-###Animating css
+###Css
 
 You can animate **any css** (still have to test all) listed [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties):
 
