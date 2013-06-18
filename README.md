@@ -50,48 +50,42 @@ clearAnima3d();
 Parameters
 -------
 
-Instant animations are default:
+**Instant animations** are default:
 
 ``` javascript
 $(this).anima({x:10});
 ```
 
-You can specify a duration, default easing is "ease":
+You can specify a **duration**, default easing is "ease":
 
 ``` javascript
 $(this).anima({x:10}, 400);
 ```
 
-You can specify a custom easing or a preset easing:
+You can specify a **custom easing** or a **preset easing**:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1");
 $(this).anima({x:10}, 400, "linear");
 ```
 
-You can specify a delay, they run asynchronously so they don't queue:
+You can specify a **delay**, they run asynchronously so they don't queue:
 
 ``` javascript
 $(this).anima({x:10}, 800, ".19,1,.22,1", 400);
 $(this).anima({y:10}, 400, "linear", 800);
 ```
 
-You can set a function to execute on animation completed:
+You can set a function to execute on animation **complete**:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1", {complete:function(){alert("done")}});
 ```
 
-You can skip automatic fallback animations:
+You can **skip automatic fallback** animations:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
-```
-
-If you want backfaceVisibility on the animation, you have to set it this way, because by default the animation sets backfaceVisibility to false, for performance and to fix some browser bugs:
-
-``` javascript
-$(this).anima({x:10}, 400, ".19,1,.22,1", {backfaceVisibility:true});
 ```
 
 The properties you can animate can be:
