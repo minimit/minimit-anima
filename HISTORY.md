@@ -1,9 +1,8 @@
 
-
 v1.2
 ---------------------
 
-  * fixed stopAnima with jumptoend false
+  * fixed stopAnima with jumpToEnd false
 
 v1.1
 ---------------------
