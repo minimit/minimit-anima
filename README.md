@@ -164,7 +164,7 @@ Stop the current running animations:
 $(this).stopAnima(); // or $(this).stopAnima2d(); or $(this).stopAnima3d();
 ```
 
-Stop the current running animations and clear the queue:
+Stop the current running animations and clear all delayed animations:
 
 ``` javascript
 $(this).stopAnima(true);
@@ -176,7 +176,7 @@ Stop the current running animations and jump to end:
 $(this).stopAnima(false, true);
 ```
 
-###Other examples
+###Other examples and fixes
 
 Trigger hardware accelerated animations, by animating the **z** and the **perspective** property:
 
@@ -188,6 +188,26 @@ Do different animations based on browser support of transition and transform3d:
 
 ``` javascript
 $(this).anima3d({rotateX:"10deg", rotateY:"10deg", rotateZ:"10deg"}, 800).anima2d({scale:0.8}, 800);
+```
+
+Fix browser bug in chrome, 1 pixel shift:
+
+``` javascript
+$(this).css("backface-visibility", "hidden");
+```
+
+Fix browser bug in firefox, looping animation don't apply some instant animations:
+
+``` javascript
+function startAnimation(){
+    $(this).clearAnima().stopAnima().anima({x:0, width:0});
+    $(this).anima({x:0, width:120}, 600, bez0);
+    $(this).anima({x:120, width:0}, 600, bez0, 600, {complete:function(){
+        $(this).clearAnima().stopAnima().anima({x:0, width:0}); // fix
+    }});
+    setTimeout(function(){startAnimation();}, 1300);
+}
+startAnimation();
 ```
 
 Acknowledgements
