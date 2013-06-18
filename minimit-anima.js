@@ -1,5 +1,5 @@
 /*
- * Minimit Anima 1.1
+ * Minimit Anima 1.2
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2012 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
@@ -368,8 +368,6 @@ Math);
                 if(!$.anima.partialSupport){
                     // clear list of transitions
                     path.data("transitions", "");
-                    // apply instant transition
-                    path.css(transitionCss, "none");
                     if(!jumpToEnd){
                         // set appliedCss to current value
                         var appliedCss = $.anima["transitions" + type + path.data("uniquePrefix")];
@@ -378,6 +376,9 @@ Math);
                                 path.css(prop, path.css(prop));
                             }
                         }
+                        path.css(transitionCss, "all 0s");
+                    }else{
+                        path.css(transitionCss, "none");
                     }
                     // reset the appliedCss
                     $.anima["transitions" + type + path.data("uniquePrefix")] = {};

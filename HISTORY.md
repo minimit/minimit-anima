@@ -1,4 +1,10 @@
 
+
+v1.2
+---------------------
+
+  * fixed stopAnima with jumptoend false
+
 v1.1
 ---------------------
 
