@@ -10,6 +10,9 @@ It also does scale, rotate and skew animations on browsers without transitions t
 
 My website [minimit.com](http://www.minimit.com) and my twitter [@beaver82minimit](http://twitter.com/beaver82minimit)
 
+#### Browser support
+IE8+, Firefox 3.5+, Safari 3+, Opera 9+, Chrome, Iphone, Ipad, Android, Windows Phone.
+
 Api
 -------
 
