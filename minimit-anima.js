@@ -1,7 +1,7 @@
 /*
- * Minimit Anima 1.0
+ * Minimit Anima 1.1
  * http://github.com/minimit/minimit-anima
- * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
+ * Copyright (C) 2012 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */
 
@@ -34,29 +34,6 @@ Math);
 /* ==========================================================================
                                 Anima
 ========================================================================== */
-
-/* 
- * Minimit Anima
- * @function anima(properties:object, duration:number, easing:string, options:object)
- *  @param properties.property:stringORnumber - property to animate
- *      can be any css (use string if it's not a valid javascript variable like {"margin-top":500}) or transform like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
- *  @param duration:number [Default:0] - duration of the animation
- *  @param easing:string [Default:"ease"] - bezier easing of the animation
- *      can be a custom bezier or a preset like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
- *  @param options.complete:function - function to execute on complete animation
- *  @param options.skipNoSupport:boolean [Default:false] - if you want to skip the animation on browser without transform support
- *  @param options.skipPartialSupport:boolean [Default:false] - if you want to skip the animation on browser without transform3d or transition support
- *  @param options.backfaceVisibility:boolean [Default:false] - if you want to have backfaceVisibility true or false (default false to fix some browser bugs)
- */
- 
-/* 
- * Usage examples
- *  $(".mydivs").anima({x:100}); // instant animation of transformX
- *  $(".mydivs").anima({scale:0.8}, 800, ".19,1,.22,1"); // animation of scale with duration and custom easing
- *  $(".mydivs").anima({"margin-top":500}, 200, ".19,1,.22,1", {complete:function(){$(this).css("display","none");}}); // example with css property animation and complete function
- *  $(".mydivs").anima3d({x:200}, 800).anima2d({x:100}, 800); // different animations based on browser support of transition and transform3d
- *  $(".mydivs").anima({x:200}, 800, "linear", {skipNoSupport:true}); // skip the animation on browser without transform support
- */
 
 (function($){
 
@@ -137,47 +114,55 @@ Math);
     function isset(prop){
         return typeof prop != 'undefined';
     }
-    $.fn.anima2d = function(properties, duration, easing, options){
-        return $(this).anima(properties, duration, easing, options, "anima2d");
+    $.fn.anima2d = function(properties, duration, easing, delay, options){
+        return $(this).anima(properties, duration, easing, delay, options, "anima2d");
     };
-    $.fn.anima3d = function(properties, duration, easing, options){
-        return $(this).anima(properties, duration, easing, options, "anima3d");
+    $.fn.anima3d = function(properties, duration, easing, delay, options){
+        return $(this).anima(properties, duration, easing, delay, options, "anima3d");
     };
-    $.fn.anima = function(properties, duration, easing, options, type){
-        // defaults
+    $.fn.anima = function(properties, duration, easing, delay, options, type){
+        // alternate syntax
+        if(typeof duration === 'function'){
+            options = duration;
+            duration = undefined;
+        }
+        if(typeof delay === 'object'){
+            type = options;
+            options = delay;
+            delay = 0;
+        }
+        // arguments defaults
         if(!isset(type)){type = "anima";}
         if(!isset(duration)){duration = 0;}
         if(!isset(easing)){easing = "ease";}
+        if(!isset(delay)){delay = 0;}
         if($.anima.cssEase[easing]){easing = $.anima.cssEase[easing];}
-        var backfaceVisibility = isset(options) && isset(options.backfaceVisibility) ? options.backfaceVisibility : false;
-        if(!backfaceVisibility){$(this).css("backface-visibility", "hidden");} // fix for chrome 1 pixel shift
-        if(typeof duration === 'function'){
-          options = duration;
-          duration = undefined;
-        }
         options = isset(options) ? options : {};
-        options.skipNoSupport = isset(options) && isset(options.skipNoSupport) ? options.skipNoSupport : false;
-        options.skipPartialSupport = isset(options) && isset(options.skipPartialSupport) ? options.skipPartialSupport : false;
-        options.complete = isset(options) && isset(options.complete) ? options.complete : null;
+        options.skipNoSupport = isset(options.skipNoSupport) ? options.skipNoSupport : false;
+        options.skipPartialSupport = isset(options.skipPartialSupport) ? options.skipPartialSupport : false;
+        options.complete = isset(options.complete) ? options.complete : null;
         //
         return $(this).each(function(){
             var path = $(this);
             // assign uniquePrefix, don't use uniquePrefix variable or it bugs
             if(!path.data("uniquePrefix")){
-                path.data("uniquePrefix", 'animaPrefix'+(++$.anima.uniquePrefixIndex));
+                path.data("uniquePrefix", 'animaPrefix' + (++$.anima.uniquePrefixIndex));
             }
-            if(!$.anima[path.data("uniquePrefix")]){
-                $.anima[path.data("uniquePrefix")] = {};
+            if(!$.anima["transitions" + type + path.data("uniquePrefix")]){
+                $.anima["transitions" + type + path.data("uniquePrefix")] = {};
+            }
+            if(!$.anima["timeouts" + type + path.data("uniquePrefix")]){
+                $.anima["timeouts" + type + path.data("uniquePrefix")] = [];
             }
             // call animate function
-            if(!$.anima.noSupport){
-                path.delay(0, type).dequeue(type); // autostart the queue
-                path.queue(type, function(next){
-                    $(this).goAnima(properties, duration, easing, options, type);
-                    $(this).dequeue();
-                });
-            }else{
+            if($.anima.noSupport || (delay == 0 && duration == 0)){
                 path.goAnima(properties, duration, easing, options, type);
+            }else{
+                var timeout = this["timeout" + (++$.anima.uniquePrefixIndex)];
+                timeout = setTimeout(function(){
+                    path.goAnima(properties, duration, easing, options, type);
+                }, delay);
+                $.anima["timeouts" + type + path.data("uniquePrefix")].push(timeout);
             }
         });
     };
@@ -187,7 +172,7 @@ Math);
         var easingA = $.bez(easing.split(","));
         var easingB = "cubic-bezier("+easing+")";
         var durationS = duration/1000;
-        // completes
+        // dequeue and complete
         if(options.complete){
             path.animate(
                 {fake:0},
@@ -208,7 +193,7 @@ Math);
             //
             if(!$.anima.partialSupport && !(type == "anima2d")){
                 // here we save the css animations to be able to stop them
-                var appliedCss = $.anima[path.data("uniquePrefix")];
+                var appliedCss = $.anima["transitions" + type + path.data("uniquePrefix")];
                 // translate
                 if(isset(properties.x)){
                     transformArr.push("translateX("+properties.x+"px)");
@@ -247,8 +232,8 @@ Math);
                 }
                 // update transitions with old ones
                 // it keeps not stopped transitions going
-                if(path.data("animOld")){
-                    var oldTransitions = path.data("animOld");
+                if(path.data("transitions")){
+                    var oldTransitions = path.data("transitions");
                     var newTransitions = [];
                     for(i=0; i<oldTransitions.length; i++){
                         var it = oldTransitions[i].slice(0, oldTransitions[i].indexOf(" "));
@@ -263,7 +248,7 @@ Math);
                     }
                     transitionArr = transitionArr.concat(newTransitions);
                 }
-                path.data("animOld", transitionArr);
+                path.data("transitions", transitionArr);
                 // transition
                 if(transitionArr.length > 0){path.css(transitionCss, transitionArr.join(", "));}
             }else if(!options.skipPartialSupport && $.anima.partialSupport && !(type == "anima3d")){
@@ -321,34 +306,6 @@ Math);
             duration = 0;
         }
     };
-    $.fn.delayAnima2d = function(time){
-        return $(this).each(function(){
-            if(!$.anima.noSupport){
-                $(this).delay(time, "anima2d");
-            }
-        });
-    };
-    $.fn.delayAnima3d = function(time){
-        return $(this).each(function(){
-            if(!$.anima.noSupport){
-                $(this).delay(time, "anima3d");
-            }
-        });
-    };
-    $.fn.delayAnima = function(time, type){
-        return $(this).each(function(){
-            if(!$.anima.noSupport){
-                var path = $(this);
-                if(!isset(type)){
-                    path.delay(time, "anima");
-                    path.delay(time, "anima2d");
-                    path.delay(time, "anima3d");
-                }else{
-                    path.delay(time, type);
-                }
-            }
-        });
-    };
     $.fn.clearAnima2d = function(){
         return $(this).each(function(){
             if(!$.anima.noSupport){
@@ -364,15 +321,14 @@ Math);
         });
     };
     $.fn.clearAnima = function(type){
+        if(!isset(type)){type = "anima";}
         return $(this).each(function(){
             if(!$.anima.noSupport){
                 var path = $(this);
-                if(!isset(type)){
-                    path.clearQueue("anima");
-                    path.clearQueue("anima2d");
-                    path.clearQueue("anima3d");
-                }else{
-                    path.clearQueue(type);
+                if(path.data("uniquePrefix")){
+                    for(var i=0, len=$.anima["timeouts" + type + path.data("uniquePrefix")].length; i<len; i++){
+                        clearTimeout($.anima["timeouts" + type + path.data("uniquePrefix")].pop());
+                    }
                 }
             }
         });
@@ -400,6 +356,7 @@ Math);
             clearQueue = type;
             type = undefined;
         }
+        if(!isset(type)){type = "anima";}
         //
         return $(this).each(function(){
             if(!$.anima.noSupport){
@@ -409,29 +366,24 @@ Math);
                     path.clearAnima(type);
                 }
                 if(!$.anima.partialSupport){
-                    path.data("animOld", "");
-                    // if jumpToEnd isn't set the animation keep going
-                    if(jumpToEnd){
-                        // jump to end instantly
-                        path.css(transitionCss, "none");
-                    }else{
+                    // clear list of transitions
+                    path.data("transitions", "");
+                    // apply instant transition
+                    path.css(transitionCss, "none");
+                    if(!jumpToEnd){
                         // set appliedCss to current value
-                        var appliedCss = $.anima[path.data("uniquePrefix")];
+                        var appliedCss = $.anima["transitions" + type + path.data("uniquePrefix")];
                         if(appliedCss){
                             for(var prop in appliedCss){
                                 path.css(prop, path.css(prop));
                             }
                         }
-                        // and apply instant transition
-                        path.css(transitionCss, "all 0s");
                     }
                     // reset the appliedCss
-                    $.anima[path.data("uniquePrefix")] = {};
-                    // clear completes
-                    path.stop(false, jumpToEnd);
-                }else{
-                    path.stop(false, jumpToEnd);
+                    $.anima["transitions" + type + path.data("uniquePrefix")] = {};
                 }
+                // clear completes
+                path.stop(false, jumpToEnd);
             }
         });
     };

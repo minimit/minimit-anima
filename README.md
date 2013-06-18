@@ -2,7 +2,7 @@
 
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
-It's built to have fast animation execution and it has an Api very similar to Jquery animate.
+It's built to have fast animation execution and it has an api similar to Jquery animate but with asynchronous animations (they don't queue).
 
 By default the anima method do **automatic fallback animation** on browsers without transitions or transform3d, and **instant animation** on browser without transforms.
 
@@ -16,22 +16,22 @@ Api
 Use the **anima** method to have automatic fallback:
 
 ``` javascript
-anima(properties:object, duration:number, easing:string, options:object);
+anima(properties:object, duration:number, easing:string, delay:number, options:object);
 ```
 
 Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
 
 ``` javascript
-anima2d(properties:object, duration:number, easing:string, options:object);
+anima2d(properties:object, duration:number, easing:string, delay:number, options:object);
 ```
 
 Use the **anima3d** method to execute animations only on browser with transitions or transform3d:
 
 ``` javascript
-anima3d(properties:object, duration:number, easing:string, options:object);
+anima3d(properties:object, duration:number, easing:string, delay:number, options:object);
 ```
 
-Use the respective **stopAnima** method to stop animations:
+Use the respective **stopAnima** method to stop current running animations:
 
 ``` javascript
 stopAnima(clearQueue:boolean, jumpToEnd:boolean);
@@ -39,20 +39,12 @@ stopAnima2d(clearQueue:boolean, jumpToEnd:boolean);
 stopAnima3d(clearQueue:boolean, jumpToEnd:boolean);
 ```
 
-Use the respective **delayAnima** method to delay animations:
-
-``` javascript
-delayAnima(time:number);
-delayAnima2d(time:number);
-delayAnima3d(time:number);
-```
-
-Use the respective **clearAnima** method to clear the queue:
+Use the respective **clearAnima** method to clear the queued animations:
 
 ``` javascript
 clearAnima();
-delayAnima2d();
-delayAnima3d();
+clearAnima2d();
+clearAnima3d();
 ```
 
 Parameters
@@ -74,6 +66,19 @@ Custom easing is a bezier string:
 
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1");
+```
+
+You can specify a delay for the animation, the animations don't queue so you can specify multiple :
+
+``` javascript
+$(this).anima({x:10}, 400, ".19,1,.22,1", 1000);
+```
+
+The animations delayed don't queue they run asynchronously:
+
+``` javascript
+$(this).anima({x:10}, 800, ".19,1,.22,1", 400);
+$(this).anima({y:10}, 400, "linear", 800);
 ```
 
 You can set a function to execute on animation completed:
@@ -164,7 +169,7 @@ Delay animations in the queue by 200 milliseconds:
 $(this).delayAnima(200);
 ```
 
-Clear all animations queued that have not yet been run:
+Clear all delayed animations that have not yet been run:
 
 ``` javascript
 $(this).clearAnima();
