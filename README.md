@@ -178,7 +178,7 @@ $(this).stopAnima(false, true);
 
 ###Other examples and fixes
 
-Trigger hardware accelerated animations, by animating the **z** and the **perspective** property:
+Trigger **hardware accelerated** animations, by animating the **z** and the **perspective** property:
 
 ``` javascript
 $(this).anima({x:200, z:0, perspective:1000}, 800);
