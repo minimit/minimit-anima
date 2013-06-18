@@ -68,12 +68,6 @@ Custom easing is a bezier string:
 $(this).anima({x:10}, 400, ".19,1,.22,1");
 ```
 
-You can specify a delay for the animation, the animations don't queue so you can specify multiple :
-
-``` javascript
-$(this).anima({x:10}, 400, ".19,1,.22,1", 1000);
-```
-
 The animations delayed don't queue they run asynchronously:
 
 ``` javascript
