@@ -176,7 +176,7 @@ Stop the current running animations and jump to end:
 $(this).stopAnima(false, true);
 ```
 
-###Other examples and fixes
+###Tricks and fixes
 
 Trigger **hardware accelerated** animations, by animating the **z** and the **perspective** property:
 
