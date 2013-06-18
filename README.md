@@ -152,12 +152,6 @@ $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
 
 ###Animations management
 
-Delay animations in the queue by 200 milliseconds:
-
-``` javascript
-$(this).delayAnima(200);
-```
-
 Clear all delayed animations that have not yet been run:
 
 ``` javascript
