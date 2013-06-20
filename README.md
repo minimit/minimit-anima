@@ -2,7 +2,7 @@
 
 **Hardware accelerated css3 animations with fallback for older browsers.**
 
-It's built to have fast animation execution and it has an api similar to Jquery animate but with asynchronous animations (they don't queue).
+It's built to have fast animation execution and it has an api similar to Jquery animate with animations queue.
 
 By default the anima method do **automatic fallback animation** on browsers without transitions or transform3d, and **instant animation** on browser without transforms.
 
