@@ -1,4 +1,14 @@
 
+<<<<<<< HEAD
+=======
+
+v1.3
+---------------------
+
+  * removed delay inside anima method in favor of delayAnima
+  * fixed queueing and delaying
+
+>>>>>>> v1.3
 v1.2
 ---------------------
 
