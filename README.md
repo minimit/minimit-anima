@@ -216,20 +216,6 @@ Fix browser bug in chrome, 1 pixel shift:
 $(this).css("backface-visibility", "hidden");
 ```
 
-Fix browser bug in firefox, looping animation don't apply some instant animations:
-
-``` javascript
-function startAnimation(){
-    $(this).clearAnima().stopAnima().anima({x:0, width:0});
-    $(this).anima({x:0, width:120}, 600, bez0);
-    $(this).delayAnima(600).anima({x:120, width:0}, 600, bez0, {complete:function(){
-        $(this).clearAnima().stopAnima().anima({x:0, width:0}); // fix by applying animation on complete
-    }});
-    setTimeout(function(){startAnimation();}, 1300); // fix by using longer duration
-}
-startAnimation();
-```
-
 Acknowledgements
 -------
 Copyright © 2013 Riccardo Caroli. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
