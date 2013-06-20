@@ -1,6 +1,6 @@
 # [minimit-anima](http://www.minimit.com/projects/code/minimit-anima-plugin)
 
-**Hardware accelerated css3 animations with fallback for older browsers.**
+**Hardware accelerated css3 animations with fallback on older browsers.**
 
 It's built to have fast animation execution and it has an api similar to Jquery animate with animations queue.
 
