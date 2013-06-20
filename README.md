@@ -9,7 +9,7 @@ By default the anima method do **automatic fallback animation** on browsers with
 It also does scale, rotate and skew animations on browsers without transitions thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
 
 #### Browser support
-IE7+, Firefox 3.5+, Safari 3+, Opera 9+, Chrome, Iphone, Ipad, Android, Windows Phone.
+IE9+, Firefox 3.5+, Safari 3+, Opera 10.5+, Chrome, Iphone, Ipad, Android, Windows Phone.
 
 Api
 -------
@@ -32,28 +32,22 @@ Use the **anima3d** method to execute animations only on browser with transition
 anima3d(properties:object, duration:number, easing:string, options:object);
 ```
 
-Use the respective **stopAnima** method to stop current running animations:
+Use the **stopAnima** method to stop current running animations:
 
 ``` javascript
 stopAnima(clearQueue:boolean, jumpToEnd:boolean);
-stopAnima2d(clearQueue:boolean, jumpToEnd:boolean);
-stopAnima3d(clearQueue:boolean, jumpToEnd:boolean);
 ```
 
-Use the respective **delayAnima** method to delay the animations queue:
+Use the **delayAnima** method to delay the animations queue:
 
 ``` javascript
 delayAnima(time:number);
-delayAnima2d(time:number);
-delayAnima3d(time:number);
 ```
 
-Use the respective **clearAnima** method to clear the queued animations:
+Use the **clearAnima** method to clear the queued animations:
 
 ``` javascript
 clearAnima();
-clearAnima2d();
-clearAnima3d();
 ```
 
 Parameters
@@ -62,36 +56,36 @@ Parameters
 **Instant animations** are default:
 
 ``` javascript
-$(this).anima({x:10});
+$(this).anima({x:20, y:20});
 ```
 
-You can specify a **duration**, default easing is "ease":
+You can specify a **duration**, default easing is "easeOut":
 
 ``` javascript
-$(this).anima({x:10}, 400);
+$(this).anima({x:20, y:20}, 400);
 ```
 
 You can specify a **custom easing** or a **preset easing**:
 
 ``` javascript
-$(this).anima({x:10}, 400, ".19,1,.22,1");
-$(this).anima({x:10}, 400, "linear");
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1");
+$(this).anima({x:0, y:0}, 400, "linear");
 ```
 
 You can set a function to execute on animation **complete**:
 
 ``` javascript
-$(this).anima({x:10}, 400, ".19,1,.22,1", {complete:function(){alert("done")}});
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){alert("done");}});
 ```
 
 You can **skip automatic fallback** animations:
 
 ``` javascript
-$(this).anima({x:10}, 400, ".19,1,.22,1", {skipNoSupport:true, skipPartialSupport:true});
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {skip2d:true});
 ```
 
 The properties you can animate can be:
-* **any css**, use string if it's not a valid javascript variable like {"margin-top":20}
+* **any css**, use string if it has a hypen like {"margin-top":20}
 * **any transform**, like x, y, z, skew, skewX, skewY, scale, scaleX, scaleY, scaleZ, rotate, rotateX, rotateY, rotateZ, perspective
 
 The easing property can be:
@@ -100,8 +94,6 @@ The easing property can be:
 
 Usage
 -------
-
-~~striketrought~~ things are still not tested or supported
 
 ####Setup
 
@@ -117,7 +109,7 @@ Include minimit-anima after jQuery:
 You can animate **any css** (still have to test all) listed [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties):
 
 ``` javascript
-$(this).anima({"margin-top":20}, 400);
+$(this).anima({"padding-left":20, opacity:0.6}, 400);
 ```
 
 ####Translate
@@ -125,42 +117,57 @@ $(this).anima({"margin-top":20}, 400);
 Use **x** , **y**, or **z** property:
 
 ``` javascript
-$(this).anima({x:10, y:10}, 400);
+$(this).anima({x:20, y:20}, 400);
 ```
 
 ####Scale
 
-You can use ~~**scale**~~, **scaleX**, **scaleY** or **scaleZ**:
+You can use **scale**, **scaleX**, **scaleY** or **scaleZ**:
 
 ``` javascript
-$(this).anima({scaleX:0.8, scaleY:0.8}, 400);
+$(this).anima({scaleX:0.6, scaleY:0.6}, 400);
 ```
 
 ####Rotate
 
-You can use ~~**rotate**~~, **rotateX**, **rotateY** or **rotateZ**:
+You can use **rotate**, **rotateX**, **rotateY** or **rotateZ**:
 
 ``` javascript
-$(this).anima({rotateX:"20deg", rotateZ:"20deg"}, 400);
+$(this).anima({rotate:"45deg"}, 400);
 ```
 
 ####Skew
 
-You can use ~~**skew**~~, **skewX** or **skewY**:
+You can use **skew**, **skewX** or **skewY**:
 
 ``` javascript
-$(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
+$(this).anima({skewX:"20deg", skewY:"20deg"}, 400);
 ```
-
-####Clear
 
 ####Stop
 
-Stop the current running animations:
+Stop the current running animation:
 
 ``` javascript
+$(this).anima({x:20}, 400); // this get stopped
+$(this).delayAnima(400).anima({y:20}, 400);
 $(this).stopAnima();
-// or $(this).stopAnima2d(); or $(this).stopAnima3d();
+```
+
+Stop the current running animations and clear all delayed animations:
+
+``` javascript
+$(this).anima({x:20}, 400); // this get stopped
+$(this).delayAnima(400).anima({y:20}, 400); // this get cleared
+$(this).stopAnima(true);
+```
+
+Stop the current running animations and jump to end:
+
+``` javascript
+$(this).anima({x:20}, 400); // this get stopped and jumped to end
+$(this).delayAnima(400).anima({y:20}, 400);
+$(this).stopAnima(false, true);
 ```
 
 ####Delay
@@ -168,27 +175,18 @@ $(this).stopAnima();
 Delay the animations queue:
 
 ``` javascript
-$(this).delayAnima(600); // 600 milliseconds
-// or $(this).delayAnima2d(600); or $(this).delayAnima3d(600);
+$(this).delayAnima(200).anima({x:20}, 400);
+$(this).delayAnima(200).anima({y:20}, 400);
 ```
+
+####Clear
 
 Clear all delayed animations that have not yet been run:
 
 ``` javascript
+$(this).anima({x:20}, 400);
+$(this).delayAnima(400).anima({y:20}, 400); // this get cleared
 $(this).clearAnima();
-// or $(this).clearAnima2d(); or $(this).clearAnima3d();
-```
-
-Stop the current running animations and clear all delayed animations:
-
-``` javascript
-$(this).stopAnima(true);
-```
-
-Stop the current running animations and jump to end:
-
-``` javascript
-$(this).stopAnima(false, true);
 ```
 
 ####2D and 3D
