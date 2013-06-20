@@ -19,19 +19,19 @@ Api
 Use the **anima** method to have automatic fallback:
 
 ``` javascript
-anima(properties:object, duration:number, easing:string, delay:number, options:object);
+anima(properties:object, duration:number, easing:string, options:object);
 ```
 
 Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
 
 ``` javascript
-anima2d(properties:object, duration:number, easing:string, delay:number, options:object);
+anima2d(properties:object, duration:number, easing:string, options:object);
 ```
 
 Use the **anima3d** method to execute animations only on browser with transitions or transform3d:
 
 ``` javascript
-anima3d(properties:object, duration:number, easing:string, delay:number, options:object);
+anima3d(properties:object, duration:number, easing:string, options:object);
 ```
 
 Use the respective **stopAnima** method to stop current running animations:
@@ -40,6 +40,14 @@ Use the respective **stopAnima** method to stop current running animations:
 stopAnima(clearQueue:boolean, jumpToEnd:boolean);
 stopAnima2d(clearQueue:boolean, jumpToEnd:boolean);
 stopAnima3d(clearQueue:boolean, jumpToEnd:boolean);
+```
+
+Use the respective **delayAnima** method to delay the animations queue:
+
+``` javascript
+delayAnima(time:number);
+delayAnima2d(time:number);
+delayAnima3d(time:number);
 ```
 
 Use the respective **clearAnima** method to clear the queued animations:
@@ -70,13 +78,6 @@ You can specify a **custom easing** or a **preset easing**:
 ``` javascript
 $(this).anima({x:10}, 400, ".19,1,.22,1");
 $(this).anima({x:10}, 400, "linear");
-```
-
-You can specify a **delay**, they run asynchronously so they don't queue:
-
-``` javascript
-$(this).anima({x:10}, 800, ".19,1,.22,1", 400);
-$(this).anima({y:10}, 400, "linear", 800);
 ```
 
 You can set a function to execute on animation **complete**:
@@ -155,18 +156,29 @@ $(this).anima({skewX:"10deg", skewY:"10deg"}, 400);
 
 ####Clear
 
-Clear all delayed animations that have not yet been run:
-
-``` javascript
-$(this).clearAnima(); // or $(this).clearAnima2d(); or $(this).clearAnima3d();
-```
-
 ####Stop
 
 Stop the current running animations:
 
 ``` javascript
-$(this).stopAnima(); // or $(this).stopAnima2d(); or $(this).stopAnima3d();
+$(this).stopAnima();
+// or $(this).stopAnima2d(); or $(this).stopAnima3d();
+```
+
+####Delay
+
+Delay the animations queue:
+
+``` javascript
+$(this).delayAnima(600); // 600 milliseconds
+// or $(this).delayAnima2d(600); or $(this).delayAnima3d(600);
+```
+
+Clear all delayed animations that have not yet been run:
+
+``` javascript
+$(this).clearAnima();
+// or $(this).clearAnima2d(); or $(this).clearAnima3d();
 ```
 
 Stop the current running animations and clear all delayed animations:
@@ -210,7 +222,7 @@ Fix browser bug in firefox, looping animation don't apply some instant animation
 function startAnimation(){
     $(this).clearAnima().stopAnima().anima({x:0, width:0});
     $(this).anima({x:0, width:120}, 600, bez0);
-    $(this).anima({x:120, width:0}, 600, bez0, 600, {complete:function(){
+    $(this).delayAnima(600).anima({x:120, width:0}, 600, bez0, {complete:function(){
         $(this).clearAnima().stopAnima().anima({x:0, width:0}); // fix by applying animation on complete
     }});
     setTimeout(function(){startAnimation();}, 1300); // fix by using longer duration
