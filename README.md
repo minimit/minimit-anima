@@ -218,7 +218,7 @@ Acknowledgements
 -------
 Copyright © 2013 Riccardo Caroli. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
-This plugin uses some open source code
+This plugin uses some open source code:
 * Modernizr http://modernizr.com
 * Bez http://github.com/rdallasgray/bez
 * Transform http://github.com/louisremi/jquery.transform.js
