@@ -20,16 +20,16 @@ Use the **anima** method to have automatic fallback:
 anima(properties:object, duration:number, easing:string, options:object);
 ```
 
-Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
-
-``` javascript
-anima2d(properties:object, duration:number, easing:string, options:object);
-```
-
 Use the **anima3d** method to execute animations only on browser with transitions or transform3d:
 
 ``` javascript
 anima3d(properties:object, duration:number, easing:string, options:object);
+```
+
+Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
+
+``` javascript
+anima2d(properties:object, duration:number, easing:string, options:object);
 ```
 
 Use the **stopAnima** method to stop current running animations:
@@ -189,7 +189,7 @@ $(this).delayAnima(400).anima({y:20}, 400); // this get cleared
 $(this).clearAnima();
 ```
 
-####2D and 3D
+####3D and 2D
 
 Do different animations based on browser support of transition and transform3d:
 

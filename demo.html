@@ -40,9 +40,12 @@
 		display:block;position:relative;float:left;
 		padding:10px 20px;
 		background:#ffffff;
-		width:211px;
+		width:260px;
+		margin:10px 8px;
 		overflow:hidden;
-		margin:10px 10px;
+	}
+	.group .item-cont:nth-child(3n+1) {
+		clear:both;
 	}
 	.item-cont-inside {
 		display:block;position:relative;float:left;
@@ -93,6 +96,12 @@
 		background:#f7f7f7;
 		border:1px solid #e3e3e3;
 	}
+	.total {
+		min-width:950px;
+		max-width:950px;
+		margin:0px auto;
+		padding:0px 0px;
+	}
 	</style>
 
     <!--[if lt IE 9]>
@@ -104,23 +113,17 @@
     <script src="minimit-anima.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
-    function goAnimate2(path){
-		path.data('code').func.apply(path.find('.item'));
-    }
     function goAnimate(path){
-		path.find('.item').replaceWith(path.data('html'));
-        window.goAnimation = setTimeout(function(){goAnimate(path);}, 1300);
-        window.goAnimation2 = setTimeout(function(){goAnimate2(path);}, 0);
+		path.find('.item-cont-inside').html(path.data('html'));
+        window.goAnimation = setTimeout(function(){path.data('code').func.apply(path.find('.item'));}, 0);
     }
 	$(document).delegate('.item-cont', 'mouseenter', function(){
         clearTimeout(window.goAnimation);
-        clearTimeout(window.goAnimation2);
         goAnimate($(this));
 	});
 	$(document).delegate('.item-cont', 'mouseleave', function(){
         clearTimeout(window.goAnimation);
-        clearTimeout(window.goAnimation2);
-		$(this).find('.item').replaceWith($(this).data('html'));
+		$(this).find('.item-cont-inside').html($(this).data('html'));
 	});
 	function populate(name, html, func){
 		var path = $('<div class="item-cont"><h4></h4><div class="item-cont-inside">' + html + '</div><pre class="code"></pre></div>');
@@ -133,20 +136,24 @@
 		code = code.replace(/\t/g, '');
 		code = code.replace(/\n {4}/g, "\n");
 		path.find('pre').text(code);
-		$('.container').append(path);
+		$('.container .group:last-child').append(path);
 	}
 	function title(str){
-		$('.container').append('<div class="clearfix"></div><h2 class="alt">' + str + '</h2>');
+		$('.container').append('<div class="clearfix"></div><h2 class="alt">' + str + '</h2><div class="group">');
+	}
+	function groupClose(){
+		$('.container').append('</div>');
 	}
 	</script>
 	
 </head>
     
 <body>
-	
-	<h2><a href="http://github.com/minimit/minimit-anima">minimit-anima</a> demo</h2>
 
-	<div class='container'></div>
+	<div class="total">
+		<h2><a href="http://github.com/minimit/minimit-anima">minimit-anima</a> demo</h2>
+		<div class='container'></div>
+	</div>
 
 	<script type="text/javascript">
 
@@ -161,13 +168,13 @@
 		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1");
 		$(this).anima({x:0, y:0}, 400, "linear");
 	});
-	/*fix ie9*/populate('Complete', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
-		//$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){alert("done");}});
-		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:-20, y:-20}, 400, "linear");}});
+	populate('Complete', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:0, y:0}, 400, "linear");}});
 	});
 	populate('Skip fallback', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
 		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {skip2d:true});
 	});
+	groupClose();
 
 	title('Usage');
 	populate('Css', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
@@ -195,12 +202,12 @@
 		$(this).delayAnima(200).anima({y:20}, 400);
 		$(this).stopAnima(true);
 	});
-	/*fix ie9*/populate('Stop and jumpToEnd', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Stop and jumpToEnd', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
 		$(this).anima({x:20}, 400);
 		$(this).delayAnima(200).anima({y:20}, 400);
 		$(this).stopAnima(false, true);
 	});
-	/*fix ie9*/populate('Delay', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Delay', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
 		$(this).delayAnima(200).anima({x:20}, 400);
 		$(this).delayAnima(200).anima({y:20}, 400);
 	});
@@ -209,11 +216,12 @@
 		$(this).delayAnima(400).anima({y:20}, 400);
 		$(this).clearAnima();
 	});
-	/*fix ie9*/populate('2D and 3D', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('2D and 3D', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
 		$(this).anima3d({perspective:"100px"});
 		$(this).anima3d({perspective:"100px", rotateX:"180deg"}, 400).anima2d({scale:0.6}, 400);
 		$(this).delayAnima(200).anima3d({perspective:"100px", rotateZ:"180deg"}, 400).anima2d({scale:1}, 400);
 	});
+	groupClose();
 /*
 	title('Chaining');
 	populate('Chaining', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){

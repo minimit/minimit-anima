@@ -1,5 +1,5 @@
 /*
- * Minimit Anima 1.31
+ * Minimit Anima 1.32
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2012 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
@@ -107,10 +107,18 @@ Math);
         return typeof prop != 'undefined';
     }
     $.fn.anima2d = function(properties, duration, easing, options){
-        return $(this).anima(properties, duration, easing, options, "anima2d");
+        if($.anima.partialSupport){
+            return $(this).anima(properties, duration, easing, options, "anima2d");
+        }else{
+            return $(this);
+        }
     };
     $.fn.anima3d = function(properties, duration, easing, options){
-        return $(this).anima(properties, duration, easing, options, "anima3d");
+        if(!$.anima.partialSupport){
+            return $(this).anima(properties, duration, easing, options, "anima3d");
+        }else{
+            return $(this);
+        }
     };
     $.fn.anima = function(properties, duration, easing, options, type){
         if(!$.anima.noSupport){
@@ -142,17 +150,13 @@ Math);
                     $.anima[path.data("uniquePrefix")] = {};
                 }
                 // call animate function
-                if($.anima.noSupport){
-                    path.goAnima(properties, duration, easing, options, type);
-                }else{
-                    path.queue(function(next){
-                        path.goAnima(properties, duration, easing, options, type, next);
-                        // this below fixes 0 duration animations
-                        if(duration == 0){
-                            path.stopAnima();
-                        }
-                    });
-                }
+                path.queue(function(next){
+                    path.goAnima(properties, duration, easing, options, type, next);
+                    // this below fixes 0 duration animations
+                    if(duration == 0){
+                        path.stopAnima();
+                    }
+                });
             });
         }
     };
@@ -163,7 +167,7 @@ Math);
         var easingB = "cubic-bezier("+easing+")";
         var durationS = duration/1000;
         // dequeue and complete
-        if(!$.anima.noSupport){
+        if(!$.anima.partialSupport){
             path.bind(transitionEnd, function(){
                 if(isset(options.complete)){
                     options.complete.apply(self);
@@ -307,30 +311,28 @@ Math);
             if(!isset(jumpToEnd)){jumpToEnd = false;}
             //
             return $(this).each(function(){
-                if(!$.anima.noSupport){
-                    var path = $(this);
-                    // clear animations
-                    if(!$.anima.partialSupport){
-                        // clear list of transitions
-                        path.data("transitions", "");
-                        if(!jumpToEnd){
-                            // set appliedCss to current value
-                            var appliedCss = $.anima[path.data("uniquePrefix")];
-                            if(appliedCss){
-                                for(var prop in appliedCss){
-                                    path.css(prop, path.css(prop));
-                                }
+                var path = $(this);
+                // clear animations
+                if(!$.anima.partialSupport){
+                    // clear list of transitions
+                    path.data("transitions", "");
+                    if(!jumpToEnd){
+                        // set appliedCss to current value
+                        var appliedCss = $.anima[path.data("uniquePrefix")];
+                        if(appliedCss){
+                            for(var prop in appliedCss){
+                                path.css(prop, path.css(prop));
                             }
-                            path.css(transitionCss, "all 0s");
-                        }else{
-                            path.css(transitionCss, "none");
                         }
-                        // reset the appliedCss
-                        $.anima[path.data("uniquePrefix")] = {};
+                        path.css(transitionCss, "all 0s");
+                    }else{
+                        path.css(transitionCss, "none");
                     }
-                    // queue stop
-                    path.stop(clearQueue, jumpToEnd);
+                    // reset the appliedCss
+                    $.anima[path.data("uniquePrefix")] = {};
                 }
+                // queue stop + partial support stop
+                path.stop(clearQueue, jumpToEnd);
             });
         }
     };

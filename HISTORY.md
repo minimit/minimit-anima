@@ -1,4 +1,11 @@
 
+v1.32
+---------------------
+
+	* fixed complete function get called on browser with no transition support
+	* fixed queueing with no transition support
+	* fix now anima2d and anima3d don't queue each other
+
 v1.31
 ---------------------
 
@@ -6,7 +13,7 @@ v1.31
 	* fixed transforms on browsers with transforms and no transitions
 	* removed instant animation on browser with no transforms support
 	* removed options.skipNoSupport and renamed options.skipPartialSupport to options.skip2d
-	* fixed css easing on browser with no transforms support
+	* fixed css easing on browser with no transition support
 
 v1.3
 ---------------------
