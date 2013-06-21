@@ -20,7 +20,7 @@ Use the **anima** method to have automatic fallback:
 anima(properties:object, duration:number, easing:string, options:object);
 ```
 
-Use the **anima3d** method to execute animations only on browser with transitions or transform3d:
+Use the **anima3d** method to execute animations only on browser with transitions and transform3d:
 
 ``` javascript
 anima3d(properties:object, duration:number, easing:string, options:object);
