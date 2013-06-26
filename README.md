@@ -2,6 +2,8 @@
 
 **Hardware accelerated css3 animations with fallback on older browsers.**
 
+**[demo page](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html)**
+
 It's built to have fast animation execution, and it has an api similar to jquery animate, with animations queueing.
 
 By default the anima method do **automatic fallback animation** on browsers without transitions or transform3d.
