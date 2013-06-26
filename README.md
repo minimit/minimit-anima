@@ -13,6 +13,8 @@ IE9+, Firefox 3.5+, Safari 3+, Opera 10.5+, Chrome, Iphone, Ipad, Android, Windo
 
 #### [Demo](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html)
 
+My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter.com/beaver82minimit)
+
 Api
 -------
 
