@@ -214,7 +214,7 @@ $(this).anima({"transform-origin":"0% 0%"});
 $(this).anima({rotate:"45deg"}, 400);
 ```
 
-####3D perspective
+####Perspective
 
 Because browser behaves differently with 3d animations, use this syntax to avoid browser bugs:
 * put the perspective before the animations and in every animate (firefox fix)
