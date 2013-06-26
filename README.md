@@ -228,7 +228,7 @@ $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 
 ####Hardware acceleration
 
-Trigger hardware accelerated animations, by animating the **z** and the **perspective** property:
+Trigger hardware accelerated animations by adding the **z** and the **perspective** properties:
 
 ``` javascript
 $(this).anima({x:200, z:0, perspective:1000}, 800);
@@ -236,7 +236,7 @@ $(this).anima({x:200, z:0, perspective:1000}, 800);
 
 ####Chrome 1 pixel shift
 
-Fix browser bug in chrome, 1 pixel shift:
+Fix browser bug 1 pixel shift in chrome:
 
 ``` javascript
 $(this).css("backface-visibility", "hidden");
