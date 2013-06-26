@@ -1,8 +1,8 @@
 /*
  * Minimit Anima 1.32
  * http://github.com/minimit/minimit-anima
- * Copyright (C) 2012 by Riccardo Caroli http://www.minimit.com
- * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
+ * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
+ * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
  */
 
 /* Modernizr 2.6.2 http://modernizr.com/download/#-csstransforms-csstransforms3d-csstransitions-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes
@@ -81,25 +81,22 @@ Math);
     };
     $.anima.transformProps = $.anima.transformProps1.concat($.anima.transformProps2, $.anima.transformProps3);
 
-    /* Get css3 transition and transform prefixes
+    /* Get css3 prefixes
        ----------------------------------------------------------------------- */
     function getCss(str){if(str){ return str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');}else{return false;}}
     var transEndEventNames = {'WebkitTransition':'webkitTransitionEnd', 'MozTransition':'transitionend', 'OTransition':'oTransitionEnd', 'msTransition':'MSTransitionEnd', 'transition':'transitionend'};
-    var gotTransforms = window.Modernizr.csstransforms;
-    var gotTransform3d = window.Modernizr.csstransforms3d;
-    var gotTransitions = window.Modernizr.csstransitions;
-    var transitionJs = Modernizr.prefixed('transition');
     var transformJs = Modernizr.prefixed('transform');
-    var perspectiveJs = Modernizr.prefixed('perspective');
-    var transitionCss = getCss(transitionJs);
     var transformCss = getCss(transformJs);
-    var perspectiveCss = getCss(perspectiveJs);
+    var transitionJs = Modernizr.prefixed('transition');
     var transitionEnd = transEndEventNames[transitionJs];
 
     /* Support detection
        ----------------------------------------------------------------------- */
-    $.anima.partialSupport = !transitionJs || !perspectiveJs;
+    var gotTransforms = window.Modernizr.csstransforms;
+    var gotTransform3d = window.Modernizr.csstransforms3d;
+    var gotTransitions = window.Modernizr.csstransitions;
     $.anima.noSupport = !gotTransforms;
+    $.anima.partialSupport = !gotTransform3d || !gotTransitions;
     
     /* Anima
        ----------------------------------------------------------------------- */
@@ -252,7 +249,7 @@ Math);
             }
             path.data("transitions", transitionArr);
             // transition
-            if(transitionArr.length > 0){path.css(transitionCss, transitionArr.join(", "));}
+            if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
         }else if(!options.skip2d && $.anima.partialSupport && !(type == "anima3d")){
             // translate
             if(isset(properties.x)){
@@ -324,9 +321,9 @@ Math);
                                 path.css(prop, path.css(prop));
                             }
                         }
-                        path.css(transitionCss, "all 0s");
+                        path.css("transition", "all 0s");
                     }else{
-                        path.css(transitionCss, "none");
+                        path.css("transition", "none");
                     }
                     // reset the appliedCss
                     $.anima[path.data("uniquePrefix")] = {};

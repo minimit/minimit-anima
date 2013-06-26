@@ -4,7 +4,9 @@
 <head>
 
     <meta charset="utf-8">
-    <title>Demo minimit-anima</title>
+    <title>minimit-anima demo and testing</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700' rel='stylesheet' type='text/css'>
 
 	<style type="text/css">
 	h1, h2, h3, h4, h5, h6, p {margin:0;padding:0;}
@@ -16,25 +18,75 @@
 	.clearfix:after {
 	  clear: both;
 	}
+	html {
+		padding-bottom:40px;
+	}
 	body {
 		background:#ffffff;
-		font-family:Helvetica, Arial, sans-serif;
+		margin:0;padding:0;
 	}
-	h2 {
+	h1 {
+		display:inline-block;
+		padding:40px 0px 30px 20px;
+		font-family:'Source Sans Pro', sans-serif;
 		font-size:20px;
 		color:#626262;
-		font-family:Helvetica, Arial, sans-serif;
-		margin:0px 10px;
-		padding:20px 0px 0px 20px;
+		margin-bottom:-20px;
+		font-weight:700;
 	}
-	h2.alt {
-		padding:36px 0px 20px 20px;
+	.h1-cont {
+		display:block;position:relative;float:left;
+		margin:0px 10px;
+	}
+	.h1-cont a, .h1-cont a:visited {
+		color:#232323;
+		margin-left:20px;
+		font-family:'Source Sans Pro', sans-serif;
+		font-size:11px;
+		text-decoration:none;
+		text-transform:uppercase;
+		font-weight:600;
+		padding-bottom:1px;
+		border-bottom:2px solid #d8d8d8;
+		-webkit-transition:color 0.75s cubic-bezier(0,.63,.41,.98), border 1.6s cubic-bezier(0,.63,.41,.98);
+		-moz-transition:color 0.75s cubic-bezier(0,.63,.41,.98), border 1.6s cubic-bezier(0,.63,.41,.98);
+		-ms-transition:color 0.75s cubic-bezier(0,.63,.41,.98), border 1.6s cubic-bezier(0,.63,.41,.98);
+		-o-transition:color 0.75s cubic-bezier(0,.63,.41,.98), border 1.6s cubic-bezier(0,.63,.41,.98);
+		transition:color 0.75s cubic-bezier(0,.63,.41,.98), border 1.6s cubic-bezier(0,.63,.41,.98);
+	}
+	.h1-cont a:hover {
+		color:#000000;
+		border-bottom:2px solid #bde73c;
+		text-decoration:none;
+	}
+	.h1-cont a:active {
+		position:relative;
+		top:1px;
+	}
+	h2 {
+		padding:40px 0px 40px 20px;
+		font-family:'Source Sans Pro', sans-serif;
+		font-size:36px;
+		color:#95c500;
+		font-weight:600;
+	}
+	.h2-cont {
+		display:block;position:relative;float:left;
+		margin:30px 10px;
+	}
+	.h2-bkg {
+		display:block;position:absolute;z-index:-1;
+		background:#f4f4f4;
+		width:15000px;
+		left:-5000px;
+	    height:100%;
 	}
 	h4 {
-		font-size:14px;
-		color:#626262;
+		font-size:16px;
+		color:#484848;
 		padding:4px 0px 10px 0px;
-		font-family:Helvetica, Arial, sans-serif;
+		font-family:'Source Sans Pro', sans-serif;
+		font-weight:600;
 	}
 	.item-cont {
 		display:block;position:relative;float:left;
@@ -49,7 +101,7 @@
 	}
 	.item-cont-inside {
 		display:block;position:relative;float:left;
-		width:211px;
+		width:260px;
 	    height:130px;
 		margin:10px 0px;
 	}
@@ -57,7 +109,9 @@
 		display:table;
 		background:#ededed;
 		border:1px solid #cecece;
-		font-size:10px;
+		font-family:'Source Sans Pro', sans-serif;
+		font-weight:600;
+		font-size:11px;
 		color:#afafaf;
 		text-transform:uppercase;
 		cursor:default;
@@ -115,7 +169,7 @@
 	<script type="text/javascript">
     function goAnimate(path){
 		path.find('.item-cont-inside').html(path.data('html'));
-        window.goAnimation = setTimeout(function(){path.data('code').func.apply(path.find('.item'));}, 0);
+        window.goAnimation = setTimeout(function(){path.data('code').func.apply(path.find('.item'));}, 100);
     }
 	$(document).delegate('.item-cont', 'mouseenter', function(){
         clearTimeout(window.goAnimation);
@@ -139,7 +193,7 @@
 		$('.container .group:last-child').append(path);
 	}
 	function title(str){
-		$('.container').append('<div class="clearfix"></div><h2 class="alt">' + str + '</h2><div class="group">');
+		$('.container').append('<div class="clearfix"></div><div class="h2-cont"><div class="h2-bkg"></div><h2 class="alt">' + str + '</h2></div><div class="group">');
 	}
 	function groupClose(){
 		$('.container').append('</div>');
@@ -151,7 +205,9 @@
 <body>
 
 	<div class="total">
-		<h2><a href="http://github.com/minimit/minimit-anima">minimit-anima</a> demo</h2>
+		<div class="h1-cont">
+			<h1>minimit-anima demo and testing</h1><a href="http://github.com/minimit/minimit-anima" target="_blank">github page</a><a href="http://www.minimit.com/projects/code/minimit-anima-plugin" target="_blank">plugin page</a>
+		</div>
 		<div class='container'></div>
 	</div>
 
@@ -217,11 +273,65 @@
 		$(this).clearAnima();
 	});
 	populate('2D and 3D', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
-		$(this).anima3d({perspective:"100px"});
-		$(this).anima3d({perspective:"100px", rotateX:"180deg"}, 400).anima2d({scale:0.6}, 400);
-		$(this).delayAnima(200).anima3d({perspective:"100px", rotateZ:"180deg"}, 400).anima2d({scale:1}, 400);
+		$(this).anima3d({rotateX:"100deg", rotateY:"100deg", rotateZ:"100deg"}, 400).anima2d({scale:0.6}, 400);
+		$(this).anima3d({rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg"}, 400).anima2d({scale:1}, 400);
 	});
 	groupClose();
+
+	title('Advanced usage');
+	populate('Transform origin', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).anima({"transform-origin":"0% 0%"});
+		$(this).anima({rotate:"45deg"}, 400);
+	});
+	populate('Perspective', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
+		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
+		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
+	});
+
+
+	/* fix this on firefox
+	// you can set perspective-origin on the parent element that you animate
+	populate('Perspective and perspective origin', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).parent().css("transform-style", "preserve-3d").anima({perspective:"100px", "perspective-origin":"0% 0%"});
+		$(this).anima({rotateX:"0deg", rotateY:"0deg"});
+		$(this).anima({rotateX:"180deg", rotateY:"0deg"}, 400);
+		$(this).anima({rotateX:"180deg", rotateY:"180deg"}, 400);
+	});*/
+	/* fix this
+	populate('Transform origin animated', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).anima({"transform-origin":"0% 0%"});
+		//$(this).anima({"transform-origin":"100% 100%"}, 400);
+		$(this).anima({rotate:"45deg"}, 400);
+	});
+	*/
+	/* fix this
+	populate('Perspective animated', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).parent().anima({"perspective":"100px", "perspective-origin":"0% 0%"});
+		$(this).parent().anima({"perspective":"10px", "perspective-origin":"100% 100%"}, 400);
+		//$(this).parent().anima({"-webkit-perspective":"200px", "-webkit-perspective-origin":"100% 100%"}, 800);
+		$(this).anima({rotateX:"180deg"}, 400);
+		$(this).anima({rotateZ:"180deg"}, 400);
+	});*/
+	groupClose();
+
+	title('Alternate syntax');
+
+	/*
+	populate('Rotate 3d', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		$(this).parent().css("perspective-origin", "0% 0%");
+		$(this).parent().css("perspective", "100px");
+		$(this).parent().anima({perspective:"100px", "perspective-origin":"50% 50%"}, 400);
+		$(this).parent().anima({perspective:"100px", "perspective-origin":"100% 100%"}, 400);
+	});
+	populate('Rotate 3d', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+		//$(this).parent().css("perspective-origin", "0% 0%");
+		//$(this).parent().css("perspective", "100px");
+		$(this).parent().anima({"-webkit-perspective":"100px", "-webkit-perspective-origin":"0% 0%"});
+		$(this).parent().anima({"-webkit-perspective":"100px", "-webkit-perspective-origin":"100% 100%"}, 400);
+		$(this).delayAnima(100).anima({rotateX:"180deg"}, 400);
+		$(this).anima({rotateZ:"180deg"}, 400);
+	});*/
 /*
 	title('Chaining');
 	populate('Chaining', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){

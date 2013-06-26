@@ -198,17 +198,43 @@ $(this).clearAnima();
 Do different animations based on browser support of transition and transform3d:
 
 ``` javascript
-$(this).anima3d({rotateX:"10deg", rotateY:"10deg", rotateZ:"10deg"}, 800).anima2d({scale:0.8}, 800);
+$(this).anima3d({rotateX:"100deg", rotateY:"100deg", rotateZ:"100deg"}, 400).anima2d({scale:0.6}, 400);
+$(this).anima3d({rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg"}, 400).anima2d({scale:1}, 400);
 ```
 
-Tricks and fixes
+Advanced usage
 -------
 
-Trigger **hardware accelerated** animations, by animating the **z** and the **perspective** property:
+####Transform origin
+
+You can set **transform-origin** on the element that you animate:
+
+``` javascript
+$(this).anima({"transform-origin":"0% 0%"});
+$(this).anima({rotate:"45deg"}, 400);
+```
+
+####3D perspective
+
+Because browser behaves differently with 3d animations, use this syntax to avoid browser bugs:
+* put the perspective before the animations and in every animate (firefox fix)
+* put the positions in each animate also if they aren't changing (ie10 fix)
+
+``` javascript
+$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
+$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
+$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
+```
+
+####Hardware acceleration
+
+Trigger hardware accelerated animations, by animating the **z** and the **perspective** property:
 
 ``` javascript
 $(this).anima({x:200, z:0, perspective:1000}, 800);
 ```
+
+####Chrome 1 pixel shift
 
 Fix browser bug in chrome, 1 pixel shift:
 
