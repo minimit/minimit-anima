@@ -1,6 +1,6 @@
 # [minimit-anima](http://www.minimit.com/projects/code/minimit-anima-plugin)
 
-**Hardware accelerated css3 animations with fallback on older browsers. [demo page](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html)**
+**Hardware accelerated css3 animations with fallback on older browsers.**
 
 It's built to have fast animation execution, and it has an api similar to jquery animate, with animations queueing.
 
@@ -10,6 +10,9 @@ It also does scale, rotate and skew animations on browsers without transitions t
 
 #### Browser support
 IE9+, Firefox 3.5+, Safari 3+, Opera 10.5+, Chrome, Iphone, Ipad, Android, Windows Phone.
+
+#### Demo
+The demo is included if you download the source, or preview the [demo page](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html).
 
 Api
 -------
