@@ -216,7 +216,7 @@ $(this).anima({rotate:"45deg"}, 400);
 
 ####Perspective
 
-Because browser behaves differently with 3d animations, use this syntax to avoid browser bugs:
+Because browsers behaves differently with 3d animations, use this syntax to avoid browser bugs:
 * put the perspective before the animations and in every animate (firefox fix)
 * put the positions in each animate also if they aren't changing (ie10 fix)
 
