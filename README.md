@@ -239,6 +239,7 @@ $(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 ```
+
 There is an alternate version that fixes ie10 keeping the animation free on other browsers (they retain the 3D value):
 
 ``` javascript
@@ -257,6 +258,15 @@ if(typeof document.body.style.msPerspective != "undefined"){ // ie10
 }else{
 	$(this).anima({perspective:"100px", rotateZ:"180deg"}, 400);
 }
+```
+
+If ie10 do strange things with the transform, just put the starting values on a anima with duration 10
+
+``` javascript
+if(typeof document.body.style.msPerspective != "undefined"){ // ie10
+    path.anima({perspective:"800px", rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg", scale:"1", opacity:1}, 10); // IE10 fix
+}
+path.anima({perspective:"800px", rotateX:"0deg", rotateY:"90.1deg", rotateZ:"0deg", scale:"0.8", opacity:0.6}, 400, ".19,1,.22,1");
 ```
 
 ####Hardware acceleration

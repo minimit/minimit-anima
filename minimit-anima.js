@@ -1,5 +1,5 @@
 /*
- * Minimit Anima 1.33
+ * Minimit Anima 1.34
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -310,6 +310,7 @@ Math);
                 var path = $(this);
                 // clear animations
                 if(!$.anima.partialSupport){
+                    path.unbind(transitionEnd);
                     // clear list of transitions
                     path.data("transitions", "");
                     if(!jumpToEnd){

@@ -1,4 +1,9 @@
 
+v1.34
+---------------------
+
+	* fixed stop bug now it unbind transitionEnd
+
 v1.33
 ---------------------
 	
