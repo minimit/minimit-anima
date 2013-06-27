@@ -183,8 +183,9 @@ $(this).stopAnima(false, true);
 Delay the animations queue:
 
 ``` javascript
-$(this).delayAnima(200).anima({x:20}, 400);
-$(this).delayAnima(200).anima({y:20}, 400);
+$(this).anima({x:20, y:0}, 400);
+$(this).delayAnima(400).anima({x:20, y:20}, 400); // this get delayed
+$(this).delayAnima(400).anima({x:0, y:20}, 400); // this get delayed
 ```
 
 ####Clear
@@ -266,9 +267,9 @@ Trigger hardware accelerated animations by adding the **z** and the **perspectiv
 $(this).anima({x:200, z:0, perspective:1000}, 800);
 ```
 
-####Chrome 1 pixel shift
+####Chrome flicker fix
 
-Fix browser bug 1 pixel shift in chrome:
+Fix chrome browser bug 1 pixel shift:
 
 ``` javascript
 $(this).css("backface-visibility", "hidden");
