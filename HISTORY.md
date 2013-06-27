@@ -1,4 +1,11 @@
 
+v1.33
+---------------------
+	
+	* fixed chaining more than 3 anima
+	* removed options.skip2d
+	* removed option argument in favor of complete function
+
 v1.32
 ---------------------
 

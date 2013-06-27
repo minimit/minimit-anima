@@ -18,22 +18,29 @@ My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter
 Api
 -------
 
+Include minimit-anima after jQuery:
+
+``` html
+<script src='jquery.js'></script>
+<script src='minimit-anima.min.js'></script>
+```
+
 Use the **anima** method to have automatic fallback:
 
 ``` javascript
-anima(properties:object, duration:number, easing:string, options:object);
+anima(properties:object, duration:number, easing:string, complete:function);
 ```
 
 Use the **anima3d** method to execute animations only on browser with transitions and transform3d:
 
 ``` javascript
-anima3d(properties:object, duration:number, easing:string, options:object);
+anima3d(properties:object, duration:number, easing:string, complete:function);
 ```
 
 Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
 
 ``` javascript
-anima2d(properties:object, duration:number, easing:string, options:object);
+anima2d(properties:object, duration:number, easing:string, complete:function);
 ```
 
 Use the **stopAnima** method to stop current running animations:
@@ -79,13 +86,7 @@ $(this).anima({x:0, y:0}, 400, "linear");
 You can set a function to execute on animation **complete**:
 
 ``` javascript
-$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){alert("done");}});
-```
-
-You can **skip automatic fallback** animations:
-
-``` javascript
-$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {skip2d:true});
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", function(){$(this).anima({x:0, y:0}, 400, "linear");});
 ```
 
 The properties you can animate can be:
@@ -96,17 +97,8 @@ The easing property can be:
 * a **custom bezier**, you can make your own at [cubic-bezier.com](http://cubic-bezier.com).
 * a **preset**, like linear, ease, easeIn, easeOut, easeInOut, easeInQuad, easeInCubic, easeInQuart, easeInQuint, easeInSine, easeInExpo, easeInCirc, easeInBack, easeOutQuad, easeOutCubic, easeOutQuart, easeOutQuint, easeOutSine, easeOutExpo, easeOutCirc, easeOutBack, easeInOutQuad, easeInOutCubic, easeInOutQuart, easeInOutQuint, easeInOutSine, easeInOutExpo, easeInOutCirc, easeInOutBack
 
-Usage
+Properties
 -------
-
-####Setup
-
-Include minimit-anima after jQuery:
-
-``` html
-<script src='jquery.js'></script>
-<script src='minimit-anima.min.js'></script>
-```
 
 ####Css
 
@@ -147,6 +139,18 @@ You can use **skew**, **skewX** or **skewY**:
 ``` javascript
 $(this).anima({skewX:"20deg", skewY:"20deg"}, 400);
 ```
+
+####Transform origin
+
+You can set **transform-origin** on the element that you animate:
+
+``` javascript
+$(this).anima({"transform-origin":"0% 0%"});
+$(this).anima({rotate:"45deg"}, 400);
+```
+
+Utils
+-------
 
 ####Stop
 
@@ -193,6 +197,9 @@ $(this).delayAnima(400).anima({y:20}, 400); // this get cleared
 $(this).clearAnima();
 ```
 
+Advanced usage
+-------
+
 ####3D and 2D
 
 Do different animations based on browser support of transition and transform3d:
@@ -202,21 +209,27 @@ $(this).anima3d({rotateX:"100deg", rotateY:"100deg", rotateZ:"100deg"}, 400).ani
 $(this).anima3d({rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg"}, 400).anima2d({scale:1}, 400);
 ```
 
-Advanced usage
--------
+####Transform values retain
 
-####Transform origin
-
-You can set **transform-origin** on the element that you animate:
+Since transform animations haven't persistent values, you have to include them in every anima if you want to retain the values:
 
 ``` javascript
-$(this).anima({"transform-origin":"0% 0%"});
-$(this).anima({rotate:"45deg"}, 400);
+$(this).anima({x:20, y:20});
+$(this).anima({x:20, y:20, rotate:"40deg"}, 400);
 ```
 
-####Perspective
+Or it will transform to the default value like this:
 
-Because browsers behaves differently with 3d animations, use this syntax to avoid browser bugs:
+``` javascript
+$(this).anima({x:20, y:20});
+$(this).anima({rotate:"40deg"}, 400);
+```
+
+It's different in some circumstances like on 3D animations.
+
+####3D transform values retain
+
+Because browsers inconsistency, use this syntax to avoid browser bugs:
 * put the perspective before the animations and in every animate (firefox fix)
 * put the positions in each animate also if they aren't changing (ie10 fix)
 
@@ -224,6 +237,25 @@ Because browsers behaves differently with 3d animations, use this syntax to avoi
 $(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
+```
+There is an alternate version that fixes ie10 keeping the animation free on other browsers (they retain the 3D value):
+
+``` javascript
+if(typeof document.body.style.msPerspective != "undefined"){ // ie10
+	$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
+}else{
+	$(this).anima({perspective:"100px"});
+}
+if(typeof document.body.style.msPerspective != "undefined"){ // ie10
+	$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
+}else{
+	$(this).anima({perspective:"100px", rotateX:"180deg"}, 400);
+}
+if(typeof document.body.style.msPerspective != "undefined"){ // ie10
+	$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
+}else{
+	$(this).anima({perspective:"100px", rotateZ:"180deg"}, 400);
+}
 ```
 
 ####Hardware acceleration

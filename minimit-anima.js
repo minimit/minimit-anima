@@ -1,5 +1,5 @@
 /*
- * Minimit Anima 1.32
+ * Minimit Anima 1.33
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -103,29 +103,29 @@ Math);
     function isset(prop){
         return typeof prop != 'undefined';
     }
-    $.fn.anima2d = function(properties, duration, easing, options){
+    $.fn.anima2d = function(properties, duration, easing, complete){
         if($.anima.partialSupport){
-            return $(this).anima(properties, duration, easing, options, "anima2d");
+            return $(this).anima(properties, duration, easing, complete, "anima2d");
         }else{
             return $(this);
         }
     };
-    $.fn.anima3d = function(properties, duration, easing, options){
+    $.fn.anima3d = function(properties, duration, easing, complete){
         if(!$.anima.partialSupport){
-            return $(this).anima(properties, duration, easing, options, "anima3d");
+            return $(this).anima(properties, duration, easing, complete, "anima3d");
         }else{
             return $(this);
         }
     };
-    $.fn.anima = function(properties, duration, easing, options, type){
+    $.fn.anima = function(properties, duration, easing, complete, type){
         if(!$.anima.noSupport){
             // alternate syntax
             if(typeof duration === 'function'){
-                options = duration;
+                complete = duration;
                 duration = undefined;
             }
             if(typeof easing === 'function'){
-                options = easing;
+                complete = easing;
                 easing = undefined;
             }
             // arguments defaults
@@ -133,8 +133,6 @@ Math);
             if(!isset(duration)){duration = 0;}
             if(!isset(easing)){easing = "easeOut";}
             if($.anima.cssEase[easing]){easing = $.anima.cssEase[easing];}
-            options = isset(options) ? options : {};
-            options.skip2d = isset(options.skip2d) ? options.skip2d : false;
             //
             return $(this).each(function(){
                 var self = this;
@@ -148,7 +146,7 @@ Math);
                 }
                 // call animate function
                 path.queue(function(next){
-                    path.goAnima(properties, duration, easing, options, type, next);
+                    path.goAnima(properties, duration, easing, complete, type, next);
                     // this below fixes 0 duration animations
                     if(duration == 0){
                         path.stopAnima();
@@ -157,7 +155,7 @@ Math);
             });
         }
     };
-    $.fn.goAnima = function(properties, duration, easing, options, type, next){
+    $.fn.goAnima = function(properties, duration, easing, complete, type, next){
         var self = this;
         var path = $(this);
         var easingA = $.bez(easing.split(","));
@@ -165,9 +163,10 @@ Math);
         var durationS = duration/1000;
         // dequeue and complete
         if(!$.anima.partialSupport){
+            path.unbind(transitionEnd);
             path.bind(transitionEnd, function(){
-                if(isset(options.complete)){
-                    options.complete.apply(self);
+                if(isset(complete)){
+                    complete.apply(self);
                 }
                 path.dequeue();
             });
@@ -175,8 +174,8 @@ Math);
             path.animate(
                 {fake:0},
                 {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
-                    if(isset(options.complete)){
-                        options.complete.apply(self);
+                    if(isset(complete)){
+                        complete.apply(self);
                     }
                     path.dequeue();
                 }}
@@ -250,7 +249,7 @@ Math);
             path.data("transitions", transitionArr);
             // transition
             if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
-        }else if(!options.skip2d && $.anima.partialSupport && !(type == "anima3d")){
+        }else if($.anima.partialSupport && !(type == "anima3d")){
             // translate
             if(isset(properties.x)){
                 transformArr.push("translateX("+properties.x+"px)");
