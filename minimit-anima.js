@@ -1,9 +1,3 @@
-/*
- * Minimit Anima 1.35
- * http://github.com/minimit/minimit-anima
- * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
- * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
- */
 
 /* Modernizr 2.6.2 http://modernizr.com/download/#-csstransforms-csstransforms3d-csstransitions-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes
    ----------------------------------------------------------------------- */
@@ -31,9 +25,12 @@ f):h+" progid:DXImageTransform.Microsoft."+f+")";if(j.cssHooks.transformOrigin)j
 l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a.end;for(g=f.length;g--;)switch(c=f[g],i=e[g],r=0,c[0]){case p:r="px";case m:r||(r="");h=c[0]+"("+k.round(1E5*(c[1][0]+(i[1][0]-c[1][0])*d))/1E5+r+","+k.round(1E5*(c[1][1]+(i[1][1]-c[1][1])*d))/1E5+r+")"+h;break;case q+"X":case q+"Y":case t:h=c[0]+"("+k.round(1E5*(c[1]+(i[1]-c[1])*d))/1E5+"rad)"+h}a.origin&&(h=a.origin+h);n&&n.set?n.set(b,h,1):b.style[l]=h};j.transform={centerOrigin:"margin"}})(jQuery,window,document,
 Math);
 
-/* ==========================================================================
-                                Anima
-========================================================================== */
+/*
+ * Minimit Anima 1.35
+ * http://github.com/minimit/minimit-anima
+ * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
+ * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
+ */
 
 (function($){
 
@@ -165,7 +162,7 @@ Math);
         var durationS = duration/1000;
         // dequeue and complete
         if(!$.anima.noSupport){
-            if(!$.anima.partialSupport && !$.anima.noSupport){
+            if(!$.anima.partialSupport){
                 path.unbind(transitionEnd);
                 path.bind(transitionEnd, function(){
                     if(isset(complete)){
@@ -192,7 +189,7 @@ Math);
             var transformProps2 = $.anima.transformProps2;
             var transformProps3 = $.anima.transformProps3;
             //
-            if(!$.anima.partialSupport && !(type == "anima2d")){
+            if(!$.anima.partialSupport && type != "anima2d"){
                 // here we save the css animations to be able to stop them
                 var appliedCss = $.anima[path.data("uniquePrefix")];
                 // translate
@@ -252,7 +249,7 @@ Math);
                 path.data("transitions", transitionArr);
                 // transition
                 if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
-            }else if($.anima.partialSupport && !(type == "anima3d")){
+            }else if($.anima.partialSupport && type != "anima3d"){
                 // translate
                 if(isset(properties.x)){
                     transformArr.push("translateX("+properties.x+"px)");
