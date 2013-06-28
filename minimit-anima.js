@@ -1,5 +1,5 @@
 /*
- * Minimit Anima 1.34
+ * Minimit Anima 1.35
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -118,195 +118,217 @@ Math);
         }
     };
     $.fn.anima = function(properties, duration, easing, complete, type){
-        if(!$.anima.noSupport){
-            // alternate syntax
-            if(typeof duration === 'function'){
-                complete = duration;
-                duration = undefined;
+        // alternate syntax
+        if(typeof duration === 'function'){
+            complete = duration;
+            duration = undefined;
+        }
+        if(typeof easing === 'function'){
+            complete = easing;
+            easing = undefined;
+        }
+        // arguments defaults
+        if(!isset(type)){type = "anima";}
+        if(!isset(duration)){duration = 0;}
+        if(!isset(easing)){easing = "easeOut";}
+        if($.anima.cssEase[easing]){easing = $.anima.cssEase[easing];}
+        //
+        return $(this).each(function(){
+            var self = this;
+            var path = $(this);
+            // assign uniquePrefix, don't use uniquePrefix variable or it bugs
+            if(!path.data("uniquePrefix")){
+                path.data("uniquePrefix", 'animaPrefix' + (++$.anima.uniquePrefixIndex));
             }
-            if(typeof easing === 'function'){
-                complete = easing;
-                easing = undefined;
+            if(!$.anima[path.data("uniquePrefix")]){
+                $.anima[path.data("uniquePrefix")] = {};
             }
-            // arguments defaults
-            if(!isset(type)){type = "anima";}
-            if(!isset(duration)){duration = 0;}
-            if(!isset(easing)){easing = "easeOut";}
-            if($.anima.cssEase[easing]){easing = $.anima.cssEase[easing];}
-            //
-            return $(this).each(function(){
-                var self = this;
-                var path = $(this);
-                // assign uniquePrefix, don't use uniquePrefix variable or it bugs
-                if(!path.data("uniquePrefix")){
-                    path.data("uniquePrefix", 'animaPrefix' + (++$.anima.uniquePrefixIndex));
-                }
-                if(!$.anima[path.data("uniquePrefix")]){
-                    $.anima[path.data("uniquePrefix")] = {};
-                }
-                // call animate function
+            // call animate function
+            if(!$.anima.noSupport){
                 path.queue(function(next){
-                    path.goAnima(properties, duration, easing, complete, type, next);
+                    path.goAnima(properties, duration, easing, complete, type);
                     // this below fixes 0 duration animations
                     if(duration == 0){
                         path.stopAnima();
                     }
                 });
-            });
-        }
+            }else{
+                path.goAnima(properties, duration, easing, complete, type);
+            }
+        });
     };
-    $.fn.goAnima = function(properties, duration, easing, complete, type, next){
+    $.fn.goAnima = function(properties, duration, easing, complete, type){
         var self = this;
         var path = $(this);
         var easingA = $.bez(easing.split(","));
         var easingB = "cubic-bezier("+easing+")";
         var durationS = duration/1000;
         // dequeue and complete
-        if(!$.anima.partialSupport){
-            path.unbind(transitionEnd);
-            path.bind(transitionEnd, function(){
-                if(isset(complete)){
-                    complete.apply(self);
-                }
-                path.dequeue();
-            });
-        }else{
-            path.animate(
-                {fake:0},
-                {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
+        if(!$.anima.noSupport){
+            if(!$.anima.partialSupport && !$.anima.noSupport){
+                path.unbind(transitionEnd);
+                path.bind(transitionEnd, function(){
                     if(isset(complete)){
                         complete.apply(self);
                     }
                     path.dequeue();
-                }}
-            );
-        }
-        // animations
-        var transformArr = [];
-        var transitionArr = [];
-        var transformProps = $.anima.transformProps;
-        var transformProps1 = $.anima.transformProps1;
-        var transformProps2 = $.anima.transformProps2;
-        var transformProps3 = $.anima.transformProps3;
-        //
-        if(!$.anima.partialSupport && !(type == "anima2d")){
-            // here we save the css animations to be able to stop them
-            var appliedCss = $.anima[path.data("uniquePrefix")];
+                });
+            }else{
+                path.animate(
+                    {fake:0},
+                    {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
+                        if(isset(complete)){
+                            complete.apply(self);
+                        }
+                        path.dequeue();
+                    }}
+                );
+            }
+            // animations
+            var transformArr = [];
+            var transitionArr = [];
+            var transformProps = $.anima.transformProps;
+            var transformProps1 = $.anima.transformProps1;
+            var transformProps2 = $.anima.transformProps2;
+            var transformProps3 = $.anima.transformProps3;
+            //
+            if(!$.anima.partialSupport && !(type == "anima2d")){
+                // here we save the css animations to be able to stop them
+                var appliedCss = $.anima[path.data("uniquePrefix")];
+                // translate
+                if(isset(properties.x)){
+                    transformArr.push("translateX("+properties.x+"px)");
+                }
+                if(isset(properties.y)){
+                    transformArr.push("translateY("+properties.y+"px)");
+                }
+                if(isset(properties.z)){
+                    transformArr.push("translateZ("+properties.z+"px)");
+                }
+                // transforms 2d
+                for(i=0; i<transformProps2.length; i++){
+                    if(isset(properties[transformProps2[i]])){
+                        transformArr.push(transformProps2[i]+"("+properties[transformProps2[i]]+")");
+                    }
+                }
+                // transforms 3d
+                for(i=0; i<transformProps3.length; i++){
+                    if(isset(properties[transformProps3[i]])){
+                        transformArr.unshift(transformProps3[i]+"("+properties[transformProps3[i]]+")");
+                    }
+                }
+                // transforms apply
+                if(transformArr.length > 0){
+                    path.css(transformCss, transformArr.join(" "));
+                    appliedCss[transformCss] = true;
+                    transitionArr.push(transformCss+" "+durationS+"s "+easingB);
+                }
+                // other properties
+                for(var prop in properties){
+                    if($.inArray(prop, transformProps) == -1){
+                        path.css(prop, properties[prop]);
+                        appliedCss[prop] = true;
+                        transitionArr.push(prop+" "+durationS+"s "+easingB);
+                    }
+                }
+                // update transitions with old ones
+                // it keeps not stopped transitions going
+                if(path.data("transitions")){
+                    var oldTransitions = path.data("transitions");
+                    var newTransitions = [];
+                    for(i=0; i<oldTransitions.length; i++){
+                        var it = oldTransitions[i].slice(0, oldTransitions[i].indexOf(" "));
+                        for(z=0; z<transitionArr.length; z++){
+                            var zt = transitionArr[z].slice(0, transitionArr[z].indexOf(" "));
+                            if(it == zt){
+                                break;
+                            }else if(z == transitionArr.length-1){
+                                newTransitions.push(oldTransitions[i]);
+                            }
+                        }
+                    }
+                    transitionArr = transitionArr.concat(newTransitions);
+                }
+                path.data("transitions", transitionArr);
+                // transition
+                if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
+            }else if($.anima.partialSupport && !(type == "anima3d")){
+                // translate
+                if(isset(properties.x)){
+                    transformArr.push("translateX("+properties.x+"px)");
+                }
+                if(isset(properties.y)){
+                    transformArr.push("translateY("+properties.y+"px)");
+                }
+                // transforms 2d
+                for(i=0; i<transformProps2.length; i++){
+                    if(isset(properties[transformProps2[i]])){
+                        transformArr.push(transformProps2[i]+"("+properties[transformProps2[i]]+")");
+                    }
+                }
+                // transforms apply
+                if(transformArr.length > 0){
+                    path.animate(
+                        {transform:transformArr.join(" ")},
+                        {queue:false, duration:duration, specialEasing:
+                            {transform:easingA}
+                        }
+                    );
+                }
+                // other properties
+                for(var prop in properties){
+                    if($.inArray(prop, transformProps) == -1){
+                        var propCased = prop.replace(/-([a-z])/g, function(g){return g[1].toUpperCase();}); // do camel cased properties
+                        var obj0 = {}; obj0[propCased] = properties[prop];
+                        var obj1 = {}; obj1[propCased] = easingA;
+                        path.animate(
+                            obj0,
+                            {queue:false, duration:duration, specialEasing:obj1}
+                        );
+                    }
+                }
+            }
+        }else if(type != "anima3d"){
             // translate
             if(isset(properties.x)){
-                transformArr.push("translateX("+properties.x+"px)");
+                path.css("marginLeft", properties.x);
             }
             if(isset(properties.y)){
-                transformArr.push("translateY("+properties.y+"px)");
-            }
-            if(isset(properties.z)){
-                transformArr.push("translateZ("+properties.z+"px)");
-            }
-            // transforms 2d
-            for(i=0; i<transformProps2.length; i++){
-                if(isset(properties[transformProps2[i]])){
-                    transformArr.push(transformProps2[i]+"("+properties[transformProps2[i]]+")");
-                }
-            }
-            // transforms 3d
-            for(i=0; i<transformProps3.length; i++){
-                if(isset(properties[transformProps3[i]])){
-                    transformArr.unshift(transformProps3[i]+"("+properties[transformProps3[i]]+")");
-                }
-            }
-            // transforms apply
-            if(transformArr.length > 0){
-                path.css(transformCss, transformArr.join(" "));
-                appliedCss[transformCss] = true;
-                transitionArr.push(transformCss+" "+durationS+"s "+easingB);
+                path.css("marginTop", properties.x);
             }
             // other properties
             for(var prop in properties){
                 if($.inArray(prop, transformProps) == -1){
                     path.css(prop, properties[prop]);
-                    appliedCss[prop] = true;
-                    transitionArr.push(prop+" "+durationS+"s "+easingB);
                 }
             }
-            // update transitions with old ones
-            // it keeps not stopped transitions going
-            if(path.data("transitions")){
-                var oldTransitions = path.data("transitions");
-                var newTransitions = [];
-                for(i=0; i<oldTransitions.length; i++){
-                    var it = oldTransitions[i].slice(0, oldTransitions[i].indexOf(" "));
-                    for(z=0; z<transitionArr.length; z++){
-                        var zt = transitionArr[z].slice(0, transitionArr[z].indexOf(" "));
-                        if(it == zt){
-                            break;
-                        }else if(z == transitionArr.length-1){
-                            newTransitions.push(oldTransitions[i]);
-                        }
-                    }
-                }
-                transitionArr = transitionArr.concat(newTransitions);
-            }
-            path.data("transitions", transitionArr);
-            // transition
-            if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
-        }else if($.anima.partialSupport && !(type == "anima3d")){
-            // translate
-            if(isset(properties.x)){
-                transformArr.push("translateX("+properties.x+"px)");
-            }
-            if(isset(properties.y)){
-                transformArr.push("translateY("+properties.y+"px)");
-            }
-            // transforms 2d
-            for(i=0; i<transformProps2.length; i++){
-                if(isset(properties[transformProps2[i]])){
-                    transformArr.push(transformProps2[i]+"("+properties[transformProps2[i]]+")");
-                }
-            }
-            // transforms apply
-            if(transformArr.length > 0){
-                path.animate(
-                    {transform:transformArr.join(" ")},
-                    {queue:false, duration:duration, specialEasing:
-                        {transform:easingA}
-                    }
-                );
-            }
-            // other properties
-            for(var prop in properties){
-                if($.inArray(prop, transformProps) == -1){
-                    var propCased = prop.replace(/-([a-z])/g, function(g){return g[1].toUpperCase();}); // do camel cased properties
-                    var obj0 = {}; obj0[propCased] = properties[prop];
-                    var obj1 = {}; obj1[propCased] = easingA;
-                    path.animate(
-                        obj0,
-                        {queue:false, duration:duration, specialEasing:obj1}
-                    );
-                }
+            // complete
+            if(isset(complete)){
+                complete.apply(self);
             }
         }
     };
     $.fn.delayAnima = function(time){
-        if(!$.anima.noSupport){
-            return $(this).each(function(){
+        return $(this).each(function(){
+            if(!$.anima.noSupport){
                 $(this).delay(time);
-            });
-        }
+            }
+        });
     };
     $.fn.clearAnima = function(){
-        if(!$.anima.noSupport){
-            return $(this).each(function(){
+        return $(this).each(function(){
+            if(!$.anima.noSupport){
                 $(this).clearQueue();
-            });
-        }
+            }
+        });
     };
     $.fn.stopAnima = function(clearQueue, jumpToEnd){
-        if(!$.anima.noSupport){
-            // defaults
-            if(!isset(clearQueue)){clearQueue = false;}
-            if(!isset(jumpToEnd)){jumpToEnd = false;}
-            //
-            return $(this).each(function(){
+        // defaults
+        if(!isset(clearQueue)){clearQueue = false;}
+        if(!isset(jumpToEnd)){jumpToEnd = false;}
+        //
+        return $(this).each(function(){
+            if(!$.anima.noSupport){
                 var path = $(this);
                 // clear animations
                 if(!$.anima.partialSupport){
@@ -330,8 +352,8 @@ Math);
                 }
                 // queue stop + partial support stop
                 path.stop(clearQueue, jumpToEnd);
-            });
-        }
+            }
+        });
     };
 
 })(jQuery);

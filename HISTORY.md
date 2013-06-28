@@ -1,4 +1,9 @@
 
+v1.35
+---------------------
+	
+	* bringed back instant animation on browser with no transforms support
+
 v1.34
 ---------------------
 

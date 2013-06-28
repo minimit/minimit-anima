@@ -4,7 +4,7 @@
 
 It's built to have fast animation execution, and it has an api similar to jquery animate, with animations queueing.
 
-By default the anima method do **automatic fallback animation** on browsers without transitions or transform3d.
+By default the anima method do **automatic fallback animations** on browsers without transitions or transform3d, and instant animations on browsers without transform.
 
 It also does scale, rotate and skew animations on browsers without transitions thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
 
@@ -31,7 +31,7 @@ Use the **anima** method to have automatic fallback:
 anima(properties:object, duration:number, easing:string, complete:function);
 ```
 
-Combine the **anima3d** method to execute animations only on browser with transitions and transform3d, with the **anima2d** method to execute animations only on browsers without transitions or transform3d:
+Combine the **anima3d** method to execute animations only on browser with transitions and transform3d, with the **anima2d** method to execute animations on fallback browsers:
 
 ``` javascript
 anima3d(properties:object, duration:number, easing:string, complete:function);
