@@ -31,15 +31,10 @@ Use the **anima** method to have automatic fallback:
 anima(properties:object, duration:number, easing:string, complete:function);
 ```
 
-Use the **anima3d** method to execute animations only on browser with transitions and transform3d:
+Combine the **anima3d** method to execute animations only on browser with transitions and transform3d, with the **anima2d** method to execute animations only on browsers without transitions or transform3d:
 
 ``` javascript
 anima3d(properties:object, duration:number, easing:string, complete:function);
-```
-
-Use the **anima2d** method to execute animations only on browsers without transitions or transform3d:
-
-``` javascript
 anima2d(properties:object, duration:number, easing:string, complete:function);
 ```
 
