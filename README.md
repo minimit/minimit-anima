@@ -9,7 +9,7 @@ By default the anima method do **automatic fallback animations** on browsers wit
 It also does scale, rotate and skew animations on browsers without transitions thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
 
 #### Browser support
-IE9+, Firefox 3.5+, Safari 3+, Opera 10.5+, Chrome, Iphone, Ipad, Android, Windows Phone.
+IE8+, Firefox 3.5+, Safari 3+, Opera 10.5+, Chrome, Iphone, Ipad, Android, Windows Phone.
 
 #### [Demo](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html)
 
@@ -28,14 +28,14 @@ Include minimit-anima after jQuery:
 Use the **anima** method to have automatic fallback:
 
 ``` javascript
-anima(properties:object, duration:number, easing:string, complete:function);
+anima(properties:object, duration:number, easing:string, options:object);
 ```
 
 Combine the **anima3d** method to execute animations only on browser with transitions and transform3d, with the **anima2d** method to execute animations on fallback browsers:
 
 ``` javascript
-anima3d(properties:object, duration:number, easing:string, complete:function);
-anima2d(properties:object, duration:number, easing:string, complete:function);
+anima3d(properties:object, duration:number, easing:string, options:object);
+anima2d(properties:object, duration:number, easing:string, options:object);
 ```
 
 Use the **stopAnima** method to stop current running animations:
@@ -81,7 +81,13 @@ $(this).anima({x:0, y:0}, 400, "linear");
 You can set a function to execute on animation **complete**:
 
 ``` javascript
-$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", function(){$(this).anima({x:0, y:0}, 400, "linear");});
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:0, y:0}, 400, "linear");}});
+```
+
+You can skip instant animations on browser with no transforms support:
+
+``` javascript
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {skipInstant:true});
 ```
 
 The properties you can animate can be:

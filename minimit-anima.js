@@ -26,7 +26,7 @@ l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a
 Math);
 
 /*
- * Minimit Anima 1.35
+ * Minimit Anima 1.36
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -100,34 +100,36 @@ Math);
     function isset(prop){
         return typeof prop != 'undefined';
     }
-    $.fn.anima2d = function(properties, duration, easing, complete){
+    $.fn.anima2d = function(properties, duration, easing, options){
         if($.anima.partialSupport){
-            return $(this).anima(properties, duration, easing, complete, "anima2d");
+            return $(this).anima(properties, duration, easing, options, "anima2d");
         }else{
             return $(this);
         }
     };
-    $.fn.anima3d = function(properties, duration, easing, complete){
+    $.fn.anima3d = function(properties, duration, easing, options){
         if(!$.anima.partialSupport){
-            return $(this).anima(properties, duration, easing, complete, "anima3d");
+            return $(this).anima(properties, duration, easing, options, "anima3d");
         }else{
             return $(this);
         }
     };
-    $.fn.anima = function(properties, duration, easing, complete, type){
+    $.fn.anima = function(properties, duration, easing, options, type){
         // alternate syntax
-        if(typeof duration === 'function'){
-            complete = duration;
+        if(typeof duration === 'object'){
+            options = duration;
             duration = undefined;
         }
-        if(typeof easing === 'function'){
-            complete = easing;
+        if(typeof easing === 'object'){
+            options = easing;
             easing = undefined;
         }
         // arguments defaults
         if(!isset(type)){type = "anima";}
         if(!isset(duration)){duration = 0;}
         if(!isset(easing)){easing = "easeOut";}
+        if(!isset(options)){options = {};}
+        if(!isset(options.skipInstant)){options.skipInstant = false;}
         if($.anima.cssEase[easing]){easing = $.anima.cssEase[easing];}
         //
         return $(this).each(function(){
@@ -143,45 +145,45 @@ Math);
             // call animate function
             if(!$.anima.noSupport){
                 path.queue(function(next){
-                    path.goAnima(properties, duration, easing, complete, type);
+                    path.goAnima(properties, duration, easing, options, type);
                     // this below fixes 0 duration animations
                     if(duration == 0){
                         path.stopAnima();
                     }
                 });
             }else{
-                path.goAnima(properties, duration, easing, complete, type);
+                path.goAnima(properties, duration, easing, options, type);
             }
         });
     };
-    $.fn.goAnima = function(properties, duration, easing, complete, type){
+    $.fn.goAnima = function(properties, duration, easing, options, type){
         var self = this;
         var path = $(this);
         var easingA = $.bez(easing.split(","));
         var easingB = "cubic-bezier("+easing+")";
         var durationS = duration/1000;
         // dequeue and complete
-        if(!$.anima.noSupport){
-            if(!$.anima.partialSupport){
-                path.unbind(transitionEnd);
-                path.bind(transitionEnd, function(){
-                    if(isset(complete)){
-                        complete.apply(self);
+        if(!$.anima.noSupport && !$.anima.partialSupport){
+            path.unbind(transitionEnd);
+            path.bind(transitionEnd, function(){
+                if(isset(options.complete)){
+                    options.complete.apply(self);
+                }
+                path.dequeue();
+            });
+        }else{
+            path.animate(
+                {fake:0},
+                {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
+                    if(isset(options.complete)){
+                        options.complete.apply(self);
                     }
                     path.dequeue();
-                });
-            }else{
-                path.animate(
-                    {fake:0},
-                    {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
-                        if(isset(complete)){
-                            complete.apply(self);
-                        }
-                        path.dequeue();
-                    }}
-                );
-            }
-            // animations
+                }}
+            );
+        }
+        // animations
+        if(!$.anima.noSupport){
             var transformArr = [];
             var transitionArr = [];
             var transformProps = $.anima.transformProps;
@@ -285,7 +287,7 @@ Math);
                     }
                 }
             }
-        }else if(type != "anima3d"){
+        }else if(type != "anima3d" && !options.skipInstant){
             // translate
             if(isset(properties.x)){
                 path.css("marginLeft", properties.x);
@@ -298,10 +300,6 @@ Math);
                 if($.inArray(prop, transformProps) == -1){
                     path.css(prop, properties[prop]);
                 }
-            }
-            // complete
-            if(isset(complete)){
-                complete.apply(self);
             }
         }
     };

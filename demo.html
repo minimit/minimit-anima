@@ -9,12 +9,6 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700' rel='stylesheet' type='text/css'>
 
 	<style type="text/css">
-	.total {
-		min-width:950px;
-		max-width:950px;
-		margin:0px auto;
-		padding:0px 0px;
-	}
 	h1, h2, h3, h4, h5, h6, p {margin:0;padding:0;}
 	.clearfix:before,
 	.clearfix:after {
@@ -31,6 +25,12 @@
 		background:#ffffff;
 		margin:0;padding:0;
 	    overflow-x:hidden;
+	}
+	.total {
+		min-width:950px;
+		max-width:950px;
+		margin:0px auto;
+		padding:0px 0px;
 	}
 	h1 {
 		display:inline-block;
@@ -113,18 +113,21 @@
 		margin:10px 0px;
 	}
 	.item {
-		display:table;
-		background:#ededed;
-		border:1px solid #cecece;
-		cursor:default;
-	}
-	.item-little {
 	    position:absolute;
+		cursor:default;
 	    top:50%;
 	    left:50%;
 	    width:40px;
 	    height:40px;
 	    margin:-20px 0 0 -20px;
+	}
+	.item-little {
+		display:table;
+	    position:absolute;
+	    width:40px;
+	    height:40px;
+		background:#ededed;
+		border:1px solid #cecece;
 	}
 	.item .text {
 		display:table-cell;
@@ -166,7 +169,7 @@
 	<script type="text/javascript">
     function goAnimate(path){
 		path.find('.item-cont-inside').html(path.data('html'));
-        window.goAnimation = setTimeout(function(){path.data('code').func.apply(path.find('.item'));}, 100);
+        window.goAnimation = setTimeout(function(){path.data('code').func.apply(path.find('.item-little'));}, 100);
     }
 	$(document).delegate('.item-cont', 'mouseenter', function(){
         clearTimeout(window.goAnimation);
@@ -190,7 +193,7 @@
 		$('.container .group:last-child').append(path);
 	}
 	function title(str){
-		$('.container').append('<div class="clearfix"></div><div class="h2-cont"><div class="h2-bkg"></div><h2 class="alt">' + str + '</h2></div><div class="group">');
+		$('.container').append('<div class="clearfix"></div><div class="h2-cont"><div class="h2-bkg"></div><h2 class="alt">' + str + '</h2></div><div class="clearfix"></div><div class="group">');
 	}
 	function groupClose(){
 		$('.container').append('</div>');
@@ -211,98 +214,102 @@
 	<script type="text/javascript">
 
 	title('Parameters');
-	populate('Instant animation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Instant animation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20});
 	});
-	populate('Duration', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Duration', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20}, 400);
 	});
-	populate('Easing', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Easing', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1");
 		$(this).anima({x:0, y:0}, 400, "linear");
 	});
-	populate('Complete', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
-		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", function(){$(this).anima({x:0, y:0}, 400, "linear");});
+	populate('Complete', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:0, y:0}, 400, "linear");}});
 	});
+	populate('Skip instant', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {skipInstant:true});
+	});
+
 	groupClose();
 
 	title('Properties');
-	populate('Css', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Css', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 	});
-	populate('Translation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20}, 400);
 	});
-	populate('Scale', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({scaleX:0.6, scaleY:0.6}, 400);
 	});
-	populate('Rotate', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Rotate', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({rotate:"45deg"}, 400);
 	});
-	populate('Skew', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Skew', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({skewX:"20deg", skewY:"20deg"}, 400);
 	});
-	populate('Transform origin', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Transform origin', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({"transform-origin":"0% 0%"});
 		$(this).anima({rotate:"45deg"}, 400);
 	});
 	groupClose();
 
 	/*title('Alternate syntax');
-	populate('Css', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Css', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 	});
-	populate('Translation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:"20px", y:"20px"}, 400);
 	});
-	populate('Translation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({translate:"20px, 20px"}, 400);
 	});
-	populate('Translation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({translate:"20, 20"}, 400);
 	});
-	populate('Translation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({translate:[20, 20]}, 400);
 	});
-	populate('Translation', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({translate3d:"20px, 20px, 20px"}, 400);
 	});
-	populate('Scale', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({scaleX:"0.6", scaleY:"0.6"}, 400);
 	});
-	populate('Scale', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({scale:"0.6, 0.6"}, 400);
 	});
-	populate('Scale', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({scale:[0.6, 0.6]}, 400);
 	});
-	populate('Scale', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({scale3d:"0.6, 0.6"}, 400);
 	});
 	groupClose();*/
 
 	title('Utils');
-	populate('Stop', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Stop', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20}, 400); // this get stopped
 		$(this).delayAnima(400).anima({y:20}, 400);
 		$(this).stopAnima();
 	});
-	populate('Stop and clearQueue', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Stop and clearQueue', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20}, 400); // this get stopped
 		$(this).delayAnima(400).anima({y:20}, 400); // this get cleared
 		$(this).stopAnima(true);
 	});
-	populate('Stop and jumpToEnd', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Stop and jumpToEnd', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20}, 400); // this get stopped and jumped to end
 		$(this).delayAnima(400).anima({y:20}, 400);
 		$(this).stopAnima(false, true);
 	});
-	populate('Delay', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Delay', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:0}, 400);
 		$(this).delayAnima(400).anima({x:20, y:20}, 400); // this get delayed
 		$(this).delayAnima(400).anima({x:0, y:20}, 400); // this get delayed
 	});
-	populate('Clear', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Clear', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20}, 400);
 		$(this).delayAnima(400).anima({y:20}, 400); // this get cleared
 		$(this).clearAnima();
@@ -310,24 +317,24 @@
 	groupClose();
 
 	title('Advanced usage');
-	populate('2D and 3D', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('2D and 3D', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima3d({rotateX:"100deg", rotateY:"100deg", rotateZ:"100deg"}, 400).anima2d({scale:0.6}, 400);
 		$(this).anima3d({rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg"}, 400).anima2d({scale:1}, 400);
 	});
-	populate('Transform values retain', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20});
 		$(this).anima({rotate:"40deg"}, 400);
 	});
-	populate('Transform values retain', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20});
 		$(this).anima({x:20, y:20, rotate:"40deg"}, 400);
 	});
-	populate('3D transform values retain', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('3D transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
 		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 	});
-	populate('3D transform values retain', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('3D transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
         if(typeof document.body.style.msPerspective != "undefined"){ // ie10
 			$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
         }else{
@@ -346,7 +353,7 @@
 	});
 	/*
 	// The usage of perspective origin is inconsistent between browsers, the current workaround is this:
-	populate('Perspective origin', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Perspective origin', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).parent().css("perspective-origin", "-20px 20px").css("perspective", "100px");
 		$(this).css("-moz-perspective-origin", "-20px 20px").css("-moz-perspective", "100px"); // firefox fix
 		$(this).anima({"perspective":"100px", rotateX:"0deg", rotateY:"0deg"});
@@ -358,15 +365,15 @@
 	groupClose();
 
 	title('Other tests');
-	populate('Chaining 0', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Chaining 0', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({rotate:"40deg"}, 400);
 		$(this).anima({rotate:"0deg"}, 400);
 	});
-	populate('Chaining 1', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Chaining 1', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({rotate:"40deg"});
 		$(this).anima({rotate:"0deg"}, 400);
 	});
-	populate('Chaining 2', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Chaining 2', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:0}, 200);
 		$(this).anima({x:20, y:20}, 200);
 		$(this).anima({x:0, y:20}, 200);
@@ -374,10 +381,10 @@
 		$(this).anima({x:20, y:0}, 200);
 		$(this).anima({x:20, y:20}, 200);
 	});
-	populate('Multiple animations', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Multiple animations', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({"padding-right":20, x:20, y:20, scaleX:0.6, scaleY:0.6, skewX:"20deg", skewY:"20deg", rotate:"45deg", opacity:0.6}, 400);
 	});
-	populate('Starting values', '<div class="item item-little"><div class="text">TEXT</div></div>', function(){
+	populate('Starting values', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
         $(this).anima({x:-40, width:40});
 		$(this).anima({x:-40, width:120}, 400);
 		$(this).anima({x:40, width:40}, 400);

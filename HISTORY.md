@@ -1,4 +1,10 @@
 
+v1.36
+---------------------
+	
+	* fixed complete function on browser with no transforms support
+	* added options.skipInstant
+
 v1.35
 ---------------------
 	
