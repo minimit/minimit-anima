@@ -1,4 +1,9 @@
 
+v1.37
+---------------------
+	
+	* Now you can use px on x, y, z or other types of units (px is default)
+
 v1.36
 ---------------------
 	

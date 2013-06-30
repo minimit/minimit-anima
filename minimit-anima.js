@@ -26,7 +26,7 @@ l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a
 Math);
 
 /*
- * Minimit Anima 1.36
+ * Minimit Anima 1.37
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -77,6 +77,13 @@ Math);
         }
     };
     $.anima.transformProps = $.anima.transformProps1.concat($.anima.transformProps2, $.anima.transformProps3);
+    $.anima.unit = function(val, units) {
+        if((typeof val === "string") && (!val.match(/^[\-0-9\.]+$/))){
+            return val;
+        }else{
+            return "" + val + units;
+        }
+    };
 
     /* Get css3 prefixes
        ----------------------------------------------------------------------- */
@@ -196,13 +203,13 @@ Math);
                 var appliedCss = $.anima[path.data("uniquePrefix")];
                 // translate
                 if(isset(properties.x)){
-                    transformArr.push("translateX("+properties.x+"px)");
+                    transformArr.push("translateX(" + $.anima.unit(properties.x, "px") + ")");
                 }
                 if(isset(properties.y)){
-                    transformArr.push("translateY("+properties.y+"px)");
+                    transformArr.push("translateY(" + $.anima.unit(properties.y, "px") + ")");
                 }
                 if(isset(properties.z)){
-                    transformArr.push("translateZ("+properties.z+"px)");
+                    transformArr.push("translateZ(" + $.anima.unit(properties.z, "px") + ")");
                 }
                 // transforms 2d
                 for(i=0; i<transformProps2.length; i++){

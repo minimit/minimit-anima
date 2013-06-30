@@ -117,6 +117,12 @@ Use **x** , **y**, or **z** property:
 $(this).anima({x:20, y:20}, 400);
 ```
 
+You can use other units, only x y z have px default units:
+
+``` javascript
+$(this).anima({x:"20%", y:"20%"}, 400);
+```
+
 ####Scale
 
 You can use **scale**, **scaleX**, **scaleY** or **scaleZ**:
