@@ -3,6 +3,7 @@ v1.36
 ---------------------
 	
 	* fixed complete function on browser with no transforms support
+	* moved complete on options
 	* added options.skipInstant
 
 v1.35
