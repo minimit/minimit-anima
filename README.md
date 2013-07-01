@@ -18,7 +18,7 @@ My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter
 Api
 -------
 
-Include minimit-anima after jQuery:
+Include minimit-anima after jQuery (v1.6.4+):
 
 ``` html
 <script src='jquery.js'></script>
