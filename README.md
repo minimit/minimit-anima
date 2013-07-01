@@ -264,7 +264,7 @@ if(typeof document.body.style.msPerspective != "undefined"){ // ie10
 }
 ```
 
-If ie10 do strange things with the transform, just put the starting values on a anima with duration 10
+If ie10 do strange things with the transform, just put the starting values before on a anima with duration 10
 
 ``` javascript
 if(typeof document.body.style.msPerspective != "undefined"){ // ie10
