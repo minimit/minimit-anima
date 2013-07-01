@@ -114,13 +114,8 @@ $(this).anima({"padding-left":20, opacity:0.6}, 400);
 Use **x** , **y**, or **z** property:
 
 ``` javascript
-$(this).anima({x:20, y:20}, 400);
-```
-
-You can use other units, only x y z have px default units:
-
-``` javascript
-$(this).anima({x:"20%", y:"20%"}, 400);
+$(this).anima({x:20, y:20}, 400); // px is default unit for x, y, z
+$(this).anima({x:"-40%", y:"-40%"}, 400);
 ```
 
 ####Scale
