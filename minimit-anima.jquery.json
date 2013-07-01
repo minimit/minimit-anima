@@ -1,6 +1,6 @@
 {
   "name": "minimit-anima",
-  "title": "Minimit Anima",
+  "title": "minimit-anima",
   "description": "Jquery plugin to animate with transforms and transitions. Hardware accelerated css3 animations with fallback on older browsers.",
   "version": "1.3.7",
   "homepage": "http://www.minimit.com/projects/code/minimit-anima-plugin",
