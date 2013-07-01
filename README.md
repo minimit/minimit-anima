@@ -106,7 +106,7 @@ Properties
 You can animate **any css** (still have to test all) listed [here](http://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?redirectlocale=en-US&redirectslug=CSS%2FCSS_animated_properties):
 
 ``` javascript
-$(this).anima({"padding-left":20, opacity:0.6}, 400);
+$(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 ```
 
 ####Translate
