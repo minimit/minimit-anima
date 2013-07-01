@@ -115,7 +115,7 @@ Use **x** , **y**, or **z** property:
 
 ``` javascript
 $(this).anima({x:20, y:20}, 400); // px is default unit for x, y, z
-$(this).anima({x:"-40%", y:"-40%"}, 400);
+$(this).anima({x:"0%", y:"0%"}, 400);
 ```
 
 ####Scale
@@ -124,6 +124,7 @@ You can use **scale**, **scaleX**, **scaleY** or **scaleZ**:
 
 ``` javascript
 $(this).anima({scaleX:0.6, scaleY:0.6}, 400);
+$(this).anima({scale:"1, 1"}, 400);
 ```
 
 ####Rotate
@@ -140,6 +141,7 @@ You can use **skew**, **skewX** or **skewY**:
 
 ``` javascript
 $(this).anima({skewX:"20deg", skewY:"20deg"}, 400);
+$(this).anima({skew:"0deg, 0deg"}, 400);
 ```
 
 ####Transform origin
