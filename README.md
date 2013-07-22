@@ -205,6 +205,22 @@ $(this).clearAnima();
 Advanced usage
 -------
 
+####Fix chrome and safari flicker
+
+Fix chrome 1 pixel shift and safari flicker:
+
+``` javascript
+$(this).css("backface-visibility", "hidden");
+```
+
+####Hardware acceleration
+
+Trigger hardware accelerated animations by adding the **z** and the **perspective** properties:
+
+``` javascript
+$(this).anima({x:200, z:0, perspective:1000}, 800);
+```
+
 ####3D and 2D
 
 Do different animations based on browser support of transition and transform3d:
@@ -271,22 +287,6 @@ if(typeof document.body.style.msPerspective != "undefined"){ // ie10
     path.anima({perspective:"800px", rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg", scale:"1", opacity:1}, 10); // IE10 fix
 }
 path.anima({perspective:"800px", rotateX:"0deg", rotateY:"90.1deg", rotateZ:"0deg", scale:"0.8", opacity:0.6}, 400, ".19,1,.22,1");
-```
-
-####Hardware acceleration
-
-Trigger hardware accelerated animations by adding the **z** and the **perspective** properties:
-
-``` javascript
-$(this).anima({x:200, z:0, perspective:1000}, 800);
-```
-
-####Chrome flicker fix
-
-Fix chrome browser bug 1 pixel shift:
-
-``` javascript
-$(this).css("backface-visibility", "hidden");
 ```
 
 Acknowledgements
