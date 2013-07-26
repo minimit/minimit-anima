@@ -81,7 +81,7 @@ $(this).anima({x:0, y:0}, 400, "linear");
 You can set a function to execute on animation **complete**:
 
 ``` javascript
-$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:0, y:0}, 400, "linear");}});
+$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:-20, y:-20}, 400, "linear");}});
 ```
 
 You can skip instant animations on browser with no transforms support:
