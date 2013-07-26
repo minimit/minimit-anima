@@ -26,7 +26,7 @@ l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a
 Math);
 
 /*
- * Minimit Anima 1.38
+ * Minimit Anima 1.3.9
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -88,11 +88,9 @@ Math);
     /* Get css3 prefixes
        ----------------------------------------------------------------------- */
     function getCss(str){if(str){ return str.replace(/([A-Z])/g, function(str,m1){ return '-' + m1.toLowerCase(); }).replace(/^ms-/,'-ms-');}else{return false;}}
-    var transEndEventNames = {'WebkitTransition':'webkitTransitionEnd', 'MozTransition':'transitionend', 'OTransition':'oTransitionEnd', 'msTransition':'MSTransitionEnd', 'transition':'transitionend'};
     var transformJs = Modernizr.prefixed('transform');
     var transformCss = getCss(transformJs);
     var transitionJs = Modernizr.prefixed('transition');
-    var transitionEnd = transEndEventNames[transitionJs];
 
     /* Support detection
        ----------------------------------------------------------------------- */
@@ -169,26 +167,6 @@ Math);
         var easingA = $.bez(easing.split(","));
         var easingB = "cubic-bezier("+easing+")";
         var durationS = duration/1000;
-        // dequeue and complete
-        if(!$.anima.noSupport && !$.anima.partialSupport){
-            path.unbind(transitionEnd);
-            path.bind(transitionEnd, function(){
-                if(isset(options.complete)){
-                    options.complete.apply(self);
-                }
-                path.dequeue();
-            });
-        }else{
-            path.animate(
-                {fake:0},
-                {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
-                    if(isset(options.complete)){
-                        options.complete.apply(self);
-                    }
-                    path.dequeue();
-                }}
-            );
-        }
         // animations
         if(!$.anima.noSupport){
             var transformArr = [];
@@ -197,7 +175,7 @@ Math);
             var transformProps1 = $.anima.transformProps1;
             var transformProps2 = $.anima.transformProps2;
             var transformProps3 = $.anima.transformProps3;
-            //
+            // animation
             if(!$.anima.partialSupport && type != "anima2d"){
                 // here we save the css animations to be able to stop them
                 var appliedCss = $.anima[path.data("uniquePrefix")];
@@ -294,6 +272,16 @@ Math);
                     }
                 }
             }
+            // dequeue and complete
+            path.animate(
+                {fake:0},
+                {queue:false, duration:duration, specialEasing:{fake:easingA}, complete:function(){
+                    if(isset(options.complete)){
+                        options.complete.apply(self);
+                    }
+                    path.dequeue();
+                }}
+            );
         }else if(type != "anima3d" && !options.skipInstant){
             // translate
             if(isset(properties.x)){
@@ -307,6 +295,10 @@ Math);
                 if($.inArray(prop, transformProps) == -1){
                     path.css(prop, properties[prop]);
                 }
+            }
+            // complete
+            if(isset(options.complete)){
+                options.complete.apply(self);
             }
         }
     };
@@ -334,7 +326,6 @@ Math);
                 var path = $(this);
                 // clear animations
                 if(!$.anima.partialSupport){
-                    path.unbind(transitionEnd);
                     // clear list of transitions
                     path.data("transitions", "");
                     if(!jumpToEnd){

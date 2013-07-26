@@ -1,4 +1,9 @@
 
+v1.3.9
+---------------------
+	
+	* Fixed multiple calls on complete on animations with different properties, not using transitionEnd internally
+
 v1.37
 ---------------------
 	

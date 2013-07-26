@@ -225,7 +225,7 @@
 		$(this).anima({x:0, y:0}, 400, "linear");
 	});
 	populate('Complete', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:0, y:0}, 400, "linear");}});
+		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {complete:function(){$(this).anima({x:-20, y:-20}, 400, "linear");}});
 	});
 	populate('Skip instant', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20}, 400, ".19,1,.22,1", {skipInstant:true});
@@ -385,7 +385,7 @@
 		$(this).anima({x:20, y:20}, 200);
 	});
 	populate('Multiple animations', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({"padding-right":20, x:20, y:20, scaleX:0.6, scaleY:0.6, skewX:"20deg", skewY:"20deg", rotate:"45deg", opacity:0.6}, 400);
+		$(this).anima({"padding-right":20, x:20, y:20, scaleX:0.6, scaleY:0.6, skewX:"20deg", skewY:"20deg", rotate:"45deg", opacity:0.6}, 400, ".19,1,.22,1", {complete:function(){alert("done");}});
 	});
 	populate('Starting values', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
         $(this).anima({x:-40, width:40});
