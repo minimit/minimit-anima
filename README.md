@@ -111,12 +111,21 @@ $(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 
 ####Translate
 
-Use **x** , **y**, or **z** property:
+Use **translateX** , **translateY**, or **translateZ**:
 
 ``` javascript
-$(this).anima({x:20, y:20}, 400); // px is default unit for x, y, z
+$(this).anima({translateX:20, translateY:20}, 400); // px is default unit
+$(this).anima({translateX:"0%", translateY:"0%"}, 400);
+```
+
+Alternatively use the short syntax **x** , **y**, or **z**:
+
+``` javascript
+$(this).anima({x:20, y:20}, 400); // px is default unit
 $(this).anima({x:"0%", y:"0%"}, 400);
 ```
+
+Px is the default unit with translation.
 
 ####Scale
 

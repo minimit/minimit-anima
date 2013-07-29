@@ -238,7 +238,15 @@
 		$(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 	});
 	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({x:20, y:20}, 400); // px is default unit for x, y, z
+		$(this).anima({translateX:20, translateY:20}, 400); // px is default unit
+		$(this).anima({translateX:"0%", translateY:"0%"}, 400);
+	});
+	populate('Translation alt', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).anima({x:20, y:20}, 400); // px is default unit
+		$(this).anima({x:"0%", y:"0%"}, 400);
+	});
+	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).anima({x:20, y:20}, 400);
 		$(this).anima({x:"0%", y:"0%"}, 400);
 	});
 	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){

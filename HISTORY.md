@@ -1,4 +1,9 @@
 
+v1.4.0
+---------------------
+	
+	* Added standard syntax for tranlations. You can use translateX translateY translateZ instead of x y z
+
 v1.3.9
 ---------------------
 	

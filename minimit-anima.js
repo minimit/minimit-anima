@@ -26,7 +26,7 @@ l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a
 Math);
 
 /*
- * Minimit Anima 1.3.9
+ * Minimit Anima 1.4.0
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -41,7 +41,7 @@ Math);
         noSupport: null,
         uniquePrefixIndex: 0,
         transformProps: [],
-        transformProps1: ["x", "y", "z"],
+        transformProps1: ["x", "y", "z", "translateX", "translateY", "translateZ"],
         transformProps2: ["scale", "scaleX", "scaleY", "skew", "skewX", "skewY", "rotate", "rotateX", "rotateY"],
         transformProps3: ["scaleZ", "rotateZ", "perspective"],
         cssEase: {
@@ -179,15 +179,13 @@ Math);
             if(!$.anima.partialSupport && type != "anima2d"){
                 // here we save the css animations to be able to stop them
                 var appliedCss = $.anima[path.data("uniquePrefix")];
-                // translate
-                if(isset(properties.x)){
-                    transformArr.push("translateX(" + $.anima.unit(properties.x, "px") + ")");
-                }
-                if(isset(properties.y)){
-                    transformArr.push("translateY(" + $.anima.unit(properties.y, "px") + ")");
-                }
-                if(isset(properties.z)){
-                    transformArr.push("translateZ(" + $.anima.unit(properties.z, "px") + ")");
+                // transforms transitions
+                for(i=0; i<transformProps1.length; i++){
+                    var propName = transformProps1[i];
+                    if(isset(properties[propName])){
+                        if(propName.indexOf("translate") == -1){propName = "translate" + propName.toUpperCase();}
+                        transformArr.push(propName + "(" + $.anima.unit(properties[transformProps1[i]], "px") + ")");
+                    }
                 }
                 // transforms 2d
                 for(i=0; i<transformProps2.length; i++){
@@ -237,12 +235,13 @@ Math);
                 // transition
                 if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
             }else if($.anima.partialSupport && type != "anima3d"){
-                // translate
-                if(isset(properties.x)){
-                    transformArr.push("translateX("+properties.x+"px)");
-                }
-                if(isset(properties.y)){
-                    transformArr.push("translateY("+properties.y+"px)");
+                // transforms transitions
+                for(i=0; i<transformProps1.length; i++){
+                    var propName = transformProps1[i];
+                    if(isset(properties[propName]) && propName.toLowerCase().indexOf("z") == -1){
+                        if(propName.indexOf("translate") == -1){propName = "translate" + propName.toUpperCase();}
+                        transformArr.push(propName + "(" + $.anima.unit(properties[transformProps1[i]], "px") + ")");
+                    }
                 }
                 // transforms 2d
                 for(i=0; i<transformProps2.length; i++){
