@@ -111,8 +111,6 @@ $(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 
 ####Translate
 
-**Px** is the default unit with translate.
-
 Use **translateX** , **translateY**, or **translateZ**:
 
 ``` javascript
@@ -138,8 +136,6 @@ $(this).anima({scale:"1, 1"}, 400);
 
 ####Rotate
 
-**Deg** is the default unit with rotate.
-
 You can use **rotate**, **rotateX**, **rotateY** or **rotateZ**:
 
 ``` javascript
@@ -148,8 +144,6 @@ $(this).anima({rotateX:"0deg"}, 400);
 ```
 
 ####Skew
-
-**Deg** is the default unit with skew.
 
 You can use **skew**, **skewX** or **skewY**:
 
