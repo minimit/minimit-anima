@@ -245,59 +245,19 @@
 		$(this).anima({x:20, y:20}, 400); // px is default unit
 		$(this).anima({x:"0%", y:"0%"}, 400);
 	});
-	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({x:20, y:20}, 400);
-		$(this).anima({x:"0%", y:"0%"}, 400);
-	});
 	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({scaleX:0.6, scaleY:0.6}, 400);
 		$(this).anima({scale:"1, 1"}, 400);
 	});
 	populate('Rotate', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({rotate:"45deg"}, 400);
+		$(this).anima({rotate:45}, 400); // deg is default unit
+		$(this).anima({rotateX:"0deg"}, 400);
 	});
 	populate('Skew', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({skewX:"20deg", skewY:"20deg"}, 400);
+		$(this).anima({skewX:20, skewY:20}, 400); // deg is default unit
 		$(this).anima({skew:"0deg, 0deg"}, 400);
 	});
-	populate('Transform origin', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({"transform-origin":"0% 0%"});
-		$(this).anima({rotate:"45deg"}, 400);
-	});
 	groupClose();
-
-	/*title('Alternate syntax');
-	populate('Css', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({"padding-right":"20px", opacity:0.6}, 400);
-	});
-	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({x:"20px", y:"20px"}, 400);
-	});
-	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({translate:"20px, 20px"}, 400);
-	});
-	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({translate:"20, 20"}, 400);
-	});
-	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({translate:[20, 20]}, 400);
-	});
-	populate('Translation', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({translate3d:"20px, 20px, 20px"}, 400);
-	});
-	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({scaleX:"0.6", scaleY:"0.6"}, 400);
-	});
-	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({scale:"0.6, 0.6"}, 400);
-	});
-	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({scale:[0.6, 0.6]}, 400);
-	});
-	populate('Scale', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).anima({scale3d:"0.6, 0.6"}, 400);
-	});
-	groupClose();*/
 
 	title('Utils');
 	populate('Stop', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
@@ -328,6 +288,10 @@
 	groupClose();
 
 	title('Advanced usage');
+	populate('Transform origin', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).css("transform-origin","0% 0%");
+		$(this).anima({rotate:"45deg"}, 400);
+	});
 	populate('2D and 3D', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima3d({rotateX:"100deg", rotateY:"100deg", rotateZ:"100deg"}, 400).anima2d({scale:0.6}, 400);
 		$(this).anima3d({rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg"}, 400).anima2d({scale:1}, 400);

@@ -9,7 +9,7 @@
    ----------------------------------------------------------------------- */
 jQuery.extend({bez:function(a){var b="bez_"+$.makeArray(arguments).join("_").replace(".","p");if(typeof jQuery.easing[b]!="function"){var c=function(a,b){var c=[null,null],d=[null,null],e=[null,null],f=function(f,g){return e[g]=3*a[g],d[g]=3*(b[g]-a[g])-e[g],c[g]=1-e[g]-d[g],f*(e[g]+f*(d[g]+f*c[g]))},g=function(a){return e[0]+a*(2*d[0]+3*c[0]*a)},h=function(a){var b=a,c=0,d;while(++c<14){d=f(b,0)-a;if(Math.abs(d)<.001)break;b-=d/g(b)}return b};return function(a){return f(h(a),1)}};jQuery.easing[b]=function(b,d,e,f,g){return f*c([a[0],a[1]],[a[2],a[3]])(d/g)+e}}return b}});
 
-/* Transform https://github.com/louisremi/jquery.transform.js
+/* Transform http://github.com/louisremi/jquery.transform.js
  * Copyright 2011 @louis_remi
  * Licensed under the MIT license.
    ----------------------------------------------------------------------- */
@@ -26,7 +26,7 @@ l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a
 Math);
 
 /*
- * Minimit Anima 1.4.0
+ * Minimit Anima 1.4.1
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -41,9 +41,8 @@ Math);
         noSupport: null,
         uniquePrefixIndex: 0,
         transformProps: [],
-        transformProps1: ["x", "y", "z", "translateX", "translateY", "translateZ"],
-        transformProps2: ["scale", "scaleX", "scaleY", "skew", "skewX", "skewY", "rotate", "rotateX", "rotateY"],
-        transformProps3: ["scaleZ", "rotateZ", "perspective"],
+        transformProps1: ["x", "y", "z", "translateX", "translateY", "translateZ", "translate", "translate3d"],
+        transformProps2: ["scale", "scaleX", "scaleY", "scaleZ", "skew", "skewX", "skewY", "rotate", "rotateX", "rotateY", "rotateZ", "perspective"],
         cssEase: {
             "linear":".25,.25,.75,.75",
             "ease":".25,.1,.25,1",
@@ -76,7 +75,7 @@ Math);
             "easeInOutBack":".68,-0.55,.265,1.55"
         }
     };
-    $.anima.transformProps = $.anima.transformProps1.concat($.anima.transformProps2, $.anima.transformProps3);
+    $.anima.transformProps = $.anima.transformProps1.concat($.anima.transformProps2);
     $.anima.unit = function(val, units) {
         if((typeof val === "string") && (!val.match(/^[\-0-9\.]+$/))){
             return val;
@@ -174,7 +173,6 @@ Math);
             var transformProps = $.anima.transformProps;
             var transformProps1 = $.anima.transformProps1;
             var transformProps2 = $.anima.transformProps2;
-            var transformProps3 = $.anima.transformProps3;
             // animation
             if(!$.anima.partialSupport && type != "anima2d"){
                 // here we save the css animations to be able to stop them
@@ -187,16 +185,15 @@ Math);
                         transformArr.push(propName + "(" + $.anima.unit(properties[transformProps1[i]], "px") + ")");
                     }
                 }
-                // transforms 2d
+                // other transforms
                 for(i=0; i<transformProps2.length; i++){
                     if(isset(properties[transformProps2[i]])){
-                        transformArr.push(transformProps2[i]+"("+properties[transformProps2[i]]+")");
-                    }
-                }
-                // transforms 3d
-                for(i=0; i<transformProps3.length; i++){
-                    if(isset(properties[transformProps3[i]])){
-                        transformArr.unshift(transformProps3[i]+"("+properties[transformProps3[i]]+")");
+                        var propName = transformProps2[i];
+                        if(propName.indexOf("scale") == -1){
+                            transformArr.push(propName + "(" + $.anima.unit(properties[transformProps2[i]], "deg") + ")");
+                        }else{
+                            transformArr.push(propName + "("+properties[transformProps2[i]]+")");
+                        }
                     }
                 }
                 // transforms apply
@@ -243,10 +240,15 @@ Math);
                         transformArr.push(propName + "(" + $.anima.unit(properties[transformProps1[i]], "px") + ")");
                     }
                 }
-                // transforms 2d
+                // other transforms
                 for(i=0; i<transformProps2.length; i++){
                     if(isset(properties[transformProps2[i]])){
-                        transformArr.push(transformProps2[i]+"("+properties[transformProps2[i]]+")");
+                        var propName = transformProps2[i];
+                        if(propName.indexOf("scale") == -1){
+                            transformArr.push(propName + "(" + $.anima.unit(properties[transformProps2[i]], "deg") + ")");
+                        }else{
+                            transformArr.push(propName + "("+properties[transformProps2[i]]+")");
+                        }
                     }
                 }
                 // transforms apply

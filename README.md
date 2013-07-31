@@ -111,6 +111,8 @@ $(this).anima({"padding-right":"20px", opacity:0.6}, 400);
 
 ####Translate
 
+**Px** is the default unit with translate.
+
 Use **translateX** , **translateY**, or **translateZ**:
 
 ``` javascript
@@ -125,8 +127,6 @@ $(this).anima({x:20, y:20}, 400); // px is default unit
 $(this).anima({x:"0%", y:"0%"}, 400);
 ```
 
-Px is the default unit with translation.
-
 ####Scale
 
 You can use **scale**, **scaleX**, **scaleY** or **scaleZ**:
@@ -138,28 +138,24 @@ $(this).anima({scale:"1, 1"}, 400);
 
 ####Rotate
 
+**Deg** is the default unit with rotate.
+
 You can use **rotate**, **rotateX**, **rotateY** or **rotateZ**:
 
 ``` javascript
-$(this).anima({rotate:"45deg"}, 400);
+$(this).anima({rotate:45}, 400); // deg is default unit
+$(this).anima({rotateX:"0deg"}, 400);
 ```
 
 ####Skew
 
+**Deg** is the default unit with skew.
+
 You can use **skew**, **skewX** or **skewY**:
 
 ``` javascript
-$(this).anima({skewX:"20deg", skewY:"20deg"}, 400);
+$(this).anima({skewX:20, skewY:20}, 400); // deg is default unit
 $(this).anima({skew:"0deg, 0deg"}, 400);
-```
-
-####Transform origin
-
-You can set **transform-origin** on the element that you animate:
-
-``` javascript
-$(this).anima({"transform-origin":"0% 0%"});
-$(this).anima({rotate:"45deg"}, 400);
 ```
 
 Utils
@@ -213,6 +209,15 @@ $(this).clearAnima();
 
 Advanced usage
 -------
+
+####Transform origin
+
+You can set **transform-origin** on the element that you animate:
+
+``` javascript
+$(this).css("transform-origin","0% 0%");
+$(this).anima({rotate:"45deg"}, 400);
+```
 
 ####Fix chrome and safari flicker
 

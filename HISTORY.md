@@ -1,4 +1,9 @@
 
+v1.4.1
+---------------------
+	
+	* Added default units for rotate and skew
+
 v1.4.0
 ---------------------
 	
