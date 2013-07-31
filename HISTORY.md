@@ -1,4 +1,9 @@
 
+v1.4.2
+---------------------
+	
+	* Fixed multiple relative animations
+
 v1.4.1
 ---------------------
 	

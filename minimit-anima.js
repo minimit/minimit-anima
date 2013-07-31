@@ -26,7 +26,7 @@ l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a
 Math);
 
 /*
- * Minimit Anima 1.4.1
+ * Minimit Anima 1.4.2
  * http://github.com/minimit/minimit-anima
  * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
  * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
@@ -205,9 +205,7 @@ Math);
                 // other properties
                 for(var prop in properties){
                     if($.inArray(prop, transformProps) == -1){
-                        path.css(prop, properties[prop]);
-                        appliedCss[prop] = true;
-                        transitionArr.push(prop+" "+durationS+"s "+easingB);
+                        transitionArr.push(prop + " " + durationS + "s " + easingB);
                     }
                 }
                 // update transitions with old ones
@@ -231,6 +229,13 @@ Math);
                 path.data("transitions", transitionArr);
                 // transition
                 if(transitionArr.length > 0){path.css("transition", transitionArr.join(", "));}
+                // other properties
+                for(var prop in properties){
+                    if($.inArray(prop, transformProps) == -1){
+                        path.css(prop, properties[prop]);
+                        appliedCss[prop] = true;
+                    }
+                }
             }else if($.anima.partialSupport && type != "anima3d"){
                 // transforms transitions
                 for(i=0; i<transformProps1.length; i++){
