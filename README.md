@@ -219,6 +219,7 @@ Fix chrome 1 pixel shift and safari flicker:
 
 ``` javascript
 $(this).css("backface-visibility", "hidden");
+$(this).css("perspective", "1000");
 ```
 
 ####Hardware acceleration
