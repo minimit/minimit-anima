@@ -218,8 +218,7 @@ $(this).anima({rotate:"45deg"}, 400);
 Fix chrome 1 pixel shift and safari flicker:
 
 ``` javascript
-$(this).css("backface-visibility", "hidden");
-$(this).css("perspective", "1000");
+$(this).css("backface-visibility", "hidden").css("perspective", "1000");
 ```
 
 ####Hardware acceleration
