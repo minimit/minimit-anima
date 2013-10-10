@@ -296,7 +296,7 @@
 		$(this).anima3d({rotateX:"100deg", rotateY:"100deg", rotateZ:"100deg"}, 400).anima2d({scale:0.6}, 400);
 		$(this).anima3d({rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg"}, 400).anima2d({scale:1}, 400);
 	});
-	populate('Transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+	populate('Transform values no retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
 		$(this).anima({x:20, y:20});
 		$(this).anima({rotate:"40deg"}, 400);
 	});
@@ -304,11 +304,31 @@
 		$(this).anima({x:20, y:20});
 		$(this).anima({x:20, y:20, rotate:"40deg"}, 400);
 	});
+	populate('3D transform values no retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).css("perspective", "100px");
+		$(this).parent().css("perspective", "100px");
+		$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
+		$(this).anima({perspective:"100px", rotateX:"180deg"}, 400);
+		$(this).anima({perspective:"100px", rotateY:"180deg"}, 400);
+	});
 	populate('3D transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).css("perspective", "100px");
+		$(this).parent().css("perspective", "100px");
 		$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
 		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 	});
+
+	populate('Perspective origin', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
+		$(this).css("perspective-origin", "-20px 20px").css("perspective", "100px");
+		$(this).parent().css("perspective-origin", "-20px 20px").css("perspective", "100px");
+		$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
+		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
+		$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
+	});
+
+	/*
+	// Old fix for ie10
 	populate('3D transform values retain', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
         if(typeof document.body.style.msPerspective != "undefined"){ // ie10
 			$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
@@ -326,17 +346,22 @@
 			$(this).anima({perspective:"100px", rotateZ:"180deg"}, 400);
         }
 	});
+	*/
 	/*
-	// The usage of perspective origin is inconsistent between browsers, the current workaround is this:
-	populate('Perspective origin', '<div class="item"><div class="item-little"><div class="text">TEXT</div></div></div>', function(){
-		$(this).parent().css("perspective-origin", "-20px 20px").css("perspective", "100px");
-		$(this).css("-moz-perspective-origin", "-20px 20px").css("-moz-perspective", "100px"); // firefox fix
-		$(this).anima({"perspective":"100px", rotateX:"0deg", rotateY:"0deg"});
-		$(this).anima({"perspective":"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
-		$(this).anima({"perspective":"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
-	});
+	If ie10 do strange things with the transform, just put the starting values before on a anima with duration 10
+
+	``` javascript
+	if(typeof document.body.style.msPerspective != "undefined"){ // ie10
+	    path.anima({perspective:"800px", rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg", scale:"1", opacity:1}, 10); // IE10 fix
+	}
+	path.anima({perspective:"800px", rotateX:"0deg", rotateY:"90.1deg", rotateZ:"0deg", scale:"0.8", opacity:0.6}, 400, ".19,1,.22,1");
+	```
+	*/
+
+	/*
 	//try to animate transform-origin and perspective-origin
 	*/
+	
 	groupClose();
 
 	title('Other tests');

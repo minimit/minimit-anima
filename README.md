@@ -204,15 +204,6 @@ $(this).clearAnima();
 Advanced usage
 -------
 
-####Transform origin
-
-You can set **transform-origin** on the element that you animate:
-
-``` javascript
-$(this).css("transform-origin","0% 0%");
-$(this).anima({rotate:"45deg"}, 400);
-```
-
 ####Fix chrome and safari flicker
 
 Fix chrome 1 pixel shift and safari flicker:
@@ -227,6 +218,15 @@ Trigger hardware accelerated animations by adding the **z** and the **perspectiv
 
 ``` javascript
 $(this).anima({x:200, z:0, perspective:1000}, 800);
+```
+
+####Transform origin
+
+You can set **transform-origin** on the element that you animate:
+
+``` javascript
+$(this).css("transform-origin","0% 0%");
+$(this).anima({rotate:"45deg"}, 400);
 ```
 
 ####3D and 2D
@@ -254,48 +254,33 @@ $(this).anima({x:20, y:20});
 $(this).anima({rotate:"40deg"}, 400);
 ```
 
-It's different in some circumstances like on 3D animations.
+####Perspective
 
-####3D transform values retain
-
-Because browsers inconsistency, use this syntax to avoid browser bugs:
-* put the perspective before the animations and in every animate (firefox fix)
-* put the positions in each animate also if they aren't changing (ie10 fix)
+Because browsers inconsistencies, use this syntax to avoid browser bugs:
+* put the perspective css the animated elements and on parent elements
+* put the perspective anima in all the animate (chrome and ie fix)
 
 ``` javascript
+$(this).css("perspective", "100px");
+$(this).parent().css("perspective", "100px");
 $(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 ```
 
-There is an alternate version that fixes ie10 keeping the animation free on other browsers (they retain the 3D value):
+####Perspective origin
+
+Because browsers inconsistencies, use this syntax to avoid browser bugs:
+* put the perspective-origin css the animated elements and on parent elements
 
 ``` javascript
-if(typeof document.body.style.msPerspective != "undefined"){ // ie10
-	$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
-}else{
-	$(this).anima({perspective:"100px"});
-}
-if(typeof document.body.style.msPerspective != "undefined"){ // ie10
-	$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
-}else{
-	$(this).anima({perspective:"100px", rotateX:"180deg"}, 400);
-}
-if(typeof document.body.style.msPerspective != "undefined"){ // ie10
-	$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
-}else{
-	$(this).anima({perspective:"100px", rotateZ:"180deg"}, 400);
-}
+$(this).css("perspective-origin", "-20px 20px").css("perspective", "100px");
+$(this).parent().css("perspective-origin", "-20px 20px").css("perspective", "100px");
+$(this).anima({"perspective":"100px", rotateX:"0deg", rotateY:"0deg"});
+$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
+$(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 ```
 
-If ie10 do strange things with the transform, just put the starting values before on a anima with duration 10
-
-``` javascript
-if(typeof document.body.style.msPerspective != "undefined"){ // ie10
-    path.anima({perspective:"800px", rotateX:"0deg", rotateY:"0deg", rotateZ:"0deg", scale:"1", opacity:1}, 10); // IE10 fix
-}
-path.anima({perspective:"800px", rotateX:"0deg", rotateY:"90.1deg", rotateZ:"0deg", scale:"0.8", opacity:0.6}, 400, ".19,1,.22,1");
-```
 
 Acknowledgements
 -------
