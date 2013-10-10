@@ -9,7 +9,7 @@ By default the anima method do **automatic fallback animations** on browsers wit
 It also does scale, rotate and skew animations on browsers without transitions thanks to <a href="https://github.com/louisremi/jquery.transform.js" target="_blank">jquery.transform.js</a> included in the plugin.
 
 #### Browser support
-IE8+, Firefox 3.5+, Safari 3+, Opera 10.5+, Chrome, Iphone, Ipad, Android, Windows Phone.
+IE8+, Firefox 3.5+, Safari 3+, Chrome, Ios, Android.
 
 #### [Demo](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html)
 
