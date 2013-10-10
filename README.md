@@ -276,7 +276,7 @@ Because browsers inconsistencies, use this syntax to avoid browser bugs:
 ``` javascript
 $(this).css("perspective-origin", "-20px 20px").css("perspective", "100px");
 $(this).parent().css("perspective-origin", "-20px 20px").css("perspective", "100px");
-$(this).anima({"perspective":"100px", rotateX:"0deg", rotateY:"0deg"});
+$(this).anima({perspective:"100px", rotateX:"0deg", rotateY:"0deg"});
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 ```
