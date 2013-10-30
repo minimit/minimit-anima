@@ -1,11 +1,15 @@
 {
-  "name": "minimit-anima",
-  "description": "Jquery plugin to animate with transforms and transitions. Hardware accelerated css3 animations with fallback on older browsers.",
-  "repo": "minimit/minimit-anima",
-  "version": "1.3.9",
-  "keywords": ["transforms","transitions","css3","animation","effect"],
-  "main": ["minimit-anima.min.js","minimit-anima.js"],
-  "dependencies": {
-    "jquery": ">= 1.6.4"
-  }
+	"name": "minimit-anima",
+	"description": "Jquery plugin to animate with transforms and transitions. Hardware accelerated css3 animations with fallback on older browsers.",
+	"repo": "minimit/minimit-anima",
+	"version": "1.3.9",
+	"keywords": ["transforms","transitions","css3","animation","effect"],
+	"main": ["minimit-anima.min.js","minimit-anima.js"],
+	"dependencies": {
+		"jquery": "latest"
+	},
+	"ignore": [
+        ".*",
+        "minimit-anima.jquery.json"
+	]
 }
