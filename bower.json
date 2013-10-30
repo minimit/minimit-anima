@@ -9,7 +9,7 @@
 		"jquery": "latest"
 	},
 	"ignore": [
-        ".*",
-        "minimit-anima.jquery.json"
+		".*",
+		"minimit-anima.jquery.json"
 	]
 }
