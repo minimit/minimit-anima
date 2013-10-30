@@ -15,6 +15,10 @@ IE8+, Firefox 3.5+, Safari 3+, Chrome, Ios, Android.
 
 My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter.com/beaver82minimit).
 
+Install
+-------
+Install with [Bower](https://github.com/bower/bower) bower install minimit-anima or [download manually](https://raw.github.com/minimit/minimit-anima/master/minimit-anima.min.js).
+
 Api
 -------
 
