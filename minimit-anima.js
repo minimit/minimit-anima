@@ -25,13 +25,13 @@ f):h+" progid:DXImageTransform.Microsoft."+f+")";if(j.cssHooks.transformOrigin)j
 l)),C&&(b.style.zoom=1),e=e.split("+=").join(f),j.extend(a,J(f,e)),f=a.start,e=a.end;for(g=f.length;g--;)switch(c=f[g],i=e[g],r=0,c[0]){case p:r="px";case m:r||(r="");h=c[0]+"("+k.round(1E5*(c[1][0]+(i[1][0]-c[1][0])*d))/1E5+r+","+k.round(1E5*(c[1][1]+(i[1][1]-c[1][1])*d))/1E5+r+")"+h;break;case q+"X":case q+"Y":case t:h=c[0]+"("+k.round(1E5*(c[1]+(i[1]-c[1])*d))/1E5+"rad)"+h}a.origin&&(h=a.origin+h);n&&n.set?n.set(b,h,1):b.style[l]=h};j.transform={centerOrigin:"margin"}})(jQuery,window,document,
 Math);
 
-/*
- * Minimit Anima 1.4.3
- * http://github.com/minimit/minimit-anima
- * Copyright (C) 2013 by Riccardo Caroli http://www.minimit.com
- * Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
+ /**
+ * @copyright Copyright (C) 2013-2014 by Riccardo Caroli
+ * @version    Minimit Anima 1.4.3
+ * @link       http://github.com/minimit/minimit-anima
+ * @author     Riccardo Caroli http://www.minimit.com
+ * @license    Licensed under the MIT license http://www.opensource.org/licenses/mit-license.php
  */
-
 (function($){
 
     /* Settings
