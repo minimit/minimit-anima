@@ -9,7 +9,6 @@
 		"jquery": ">= 1.6.4"
 	},
 	"ignore": [
-		".*",
-		"minimit-anima.jquery.json"
+		".*"
 	]
 }
