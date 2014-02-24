@@ -1,6 +1,6 @@
 # Minimit Anima
 
-**Css3 animations with fallback on older browsers.**
+**Css3 transitions and transforms with jQuery with fallback for older browsers**
 
 It's built to have fast animation execution, and it has an api similar to jquery animate, with animations queueing.
 
