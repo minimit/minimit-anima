@@ -1,4 +1,4 @@
-# minimit-anima
+# Minimit Anima
 
 **Css3 animations with fallback on older browsers.**
 
