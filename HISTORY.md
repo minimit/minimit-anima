@@ -1,9 +1,4 @@
 
-v1.4.4
----------------------
-	
-	* Fixed $ no conflict with other libraries
-
 v1.4.3
 ---------------------
 	
