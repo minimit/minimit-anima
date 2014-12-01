@@ -11,7 +11,7 @@ It also does scale, rotate and skew animations on browsers without transitions t
 #### Browser support
 IE8+, Firefox 3.5+, Safari 3+, Chrome, Ios, Android.
 
-#### [Demo](http://htmlpreview.github.io/?http://github.com/minimit/minimit-anima/blob/master/demo.html)
+#### [Demo](http://htmlpreview.github.io/?https://github.com/minimit/minimit-anima/blob/master/demo.html)
 
 My website [minimit.com](http://www.minimit.com) and my [twitter](http://twitter.com/beaver82minimit).
 
