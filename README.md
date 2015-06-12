@@ -285,11 +285,6 @@ $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 ```
 
-<iframe src="demo.html" width="100%" height="300">
-[Demo link](demo.html)
-</iframe>
-
-
 Acknowledgements
 -------
 Copyright © 2013 Riccardo Caroli. Licensed under [MIT license](http://www.opensource.org/licenses/mit-license.php).
