@@ -285,6 +285,10 @@ $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"0deg"}, 400);
 $(this).anima({perspective:"100px", rotateX:"180deg", rotateY:"180deg"}, 400);
 ```
 
+<iframe src="demo.html" width="100%" height="300">
+	<p><a href="demo.html">Demo Link</a></p>
+</iframe>
+
 
 Acknowledgements
 -------
