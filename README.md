@@ -1,5 +1,5 @@
 
-# ----- NO LONGER MANTAINED -----
+# ----- NO LONGER MAINTAINED -----
 
 # Minimit Anima
 
