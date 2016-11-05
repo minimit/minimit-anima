@@ -1,3 +1,6 @@
+
+# ----- NO LONGER MANTAINED -----
+
 # Minimit Anima
 
 **Css3 transitions and transforms with jQuery with fallback for older browsers**
